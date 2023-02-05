@@ -13,7 +13,7 @@
     //Ruta url, Ejemplo: http://localhost/atletismo
     define('RUTA_URL', 'http://localhost/sarabastall');
 
-    DEFINE('NOMBRE_SITIO', 'Sarabastal');
+    DEFINE('NOMBRE_SITIO', 'Battle Gardens');
 
     //echo dirname(dirname(__FILE__));
     //echo dirname(__FILE__);
@@ -24,5 +24,5 @@
     define('DB_HOST', 'localhost');
     define('DB_USUARIO', 'root');
     define('DB_PASSWORD', 'Salamence!3');
-    define('DB_NOMBRE', 'Sarabastal');
+    define('DB_NOMBRE', 'battlegardens');
 ?>

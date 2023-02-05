@@ -11,7 +11,7 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                 $this->datos['usuario'] = trim($_POST['usuario']);
-                $this->datos['password'] = trim($_POST['pass']);
+                $this->datos['clave'] = trim($_POST['pass']);
 
                 $usuarioSesion = $this->loginModelo->loginUsuario($this->datos);
 
@@ -19,25 +19,7 @@
                     
                     Sesion::crearSesion($usuarioSesion);
 
-                    switch ($_SESSION['usuarioSesion']->Id_Rol){
-                        case 1:
-                            print_r("administrador");
-                            redireccionar("/admin");
-                            break;
-                        case 2:
-                            print_r("Otro Rol N 1");
-                            redireccionar("/el controlador del rol 1");
-                            break;
-                        case 3:
-                            print_r("Otro Rol N 2");
-                            redireccionar("/el controlador del rol 2");
-                            break;
-                        case 4:
-                            print_r("Otro Rol N 3");
-                            redireccionar("/el controlador del rol 4");
-                            break;
-                    }
-
+                    redireccionar('/landing_page');
                 } else{
                     redireccionar('/login/index/error_1');
                 }

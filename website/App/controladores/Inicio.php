@@ -40,4 +40,40 @@ class Inicio extends Controlador{
 
         $this->vista("landing_page",$this->datos);
     }  
+
+    public function vista_artefacto(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
+    public function vista_evento(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
+    public function vista_extraviado(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
+    public function vista_historia(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
+    public function vista_mundo(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
+    public function vista_publicacion(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
+    public function vista_usuario(){
+        
+        $this->vista("creador/artefactos",$this->datos);
+    }  
+
 }
