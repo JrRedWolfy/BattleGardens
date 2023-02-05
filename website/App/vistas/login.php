@@ -9,7 +9,7 @@
 
             <form method="post">
                 <div>
-                    <label for="floatingInput">Usuario </label>
+                    <label for="floatingInput">Nickname </label>
                     <input type="text" name="nickname" class="form-control" placeholder="" required >
                 </div>
 

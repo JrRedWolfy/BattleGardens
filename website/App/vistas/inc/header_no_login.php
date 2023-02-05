@@ -25,6 +25,6 @@
         <li>Universo</li>
         <li>Comunidad</li>
       </ul>
-      <button><a href="<?php echo RUTA_URL?>/login">Iniciar Sesion</a></button>
+      <button><a href="<?php echo RUTA_URL?>/inicio/login">Iniciar Sesion</a></button>
     </div>
   </nav>

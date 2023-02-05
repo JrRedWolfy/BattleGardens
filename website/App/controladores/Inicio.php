@@ -41,6 +41,10 @@ class Inicio extends Controlador{
         $this->vista("landing_page",$this->datos);
     }  
 
+    public function login(){
+        $this->vista("login",$this->datos);
+    }
+
     public function vista_artefacto(){
         
         $this->vista("creador/artefactos",$this->datos);

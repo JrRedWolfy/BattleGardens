@@ -6,4 +6,5 @@
     var_dump o print_r = Te mostraran un mensaje por pantalla que va por una función.
   */
   //print_r($iniciar-> getUrl());
+  
 ?>
