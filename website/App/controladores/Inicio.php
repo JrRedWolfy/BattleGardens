@@ -42,6 +42,10 @@ class Inicio extends Controlador{
     }  
 
     public function login(){
+
+        echo "Hewo!!";
+        exit();
+
         $this->vista("login",$this->datos);
     }
 

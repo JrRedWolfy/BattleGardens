@@ -8,6 +8,8 @@
         }
         
         public function index($error =''){
+
+
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                 $this->datos['usuario'] = trim($_POST['usuario']);
@@ -28,11 +30,12 @@
 
             }else{
 
-                if(Sesion::sesionCreada()){  //si ya estamos logueados redireccionamos
-                    redireccionar('/');
 
-                }
-                
+                //if(Sesion::sesionCreada()){  //si ya estamos logueados redireccionamos
+                    //redireccionar('/');
+
+                //}
+
                $this->datos['error'] = $error;
 
                $this->vista('login', $this->datos);

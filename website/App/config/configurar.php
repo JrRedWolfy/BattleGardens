@@ -11,18 +11,18 @@
     define('RUTA_APP', dirname(dirname(__FILE__)));
 
     //Ruta url, Ejemplo: http://localhost/atletismo
-    define('RUTA_URL', 'http://localhost/BattleGardens/website');
+    define('RUTA_URL', 'http://localhost/battlegardens/website');
 
     DEFINE('NOMBRE_SITIO', 'Battle Gardens');
 
-    //echo dirname(dirname(__FILE__));
-    //echo dirname(__FILE__);
-    //echo RUTA_APP;
-    //echo RUTA_URL;
+    // echo dirname(dirname(__FILE__))."<br>";
+    // echo dirname(__FILE__)."<br>";
+    // echo RUTA_APP."<br>";
+    // echo RUTA_URL;
 
     //Configuración de la Base de datos
     define('DB_HOST', 'localhost');
     define('DB_USUARIO', 'root');
-    define('DB_PASSWORD', 'Salamence!3');
+    define('DB_PASSWORD', 'Salamence13');
     define('DB_NOMBRE', 'battlegardens');
 ?>
