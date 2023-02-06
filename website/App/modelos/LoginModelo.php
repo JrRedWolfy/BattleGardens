@@ -12,6 +12,8 @@
             $this->db->bind(':nickname', $datos['nickname']);
             $this->db->bind(':clave', $datos['clave']);
 
+            print_r($this->db->registro());
+            exit();
     
             return $this->db->registro();
 

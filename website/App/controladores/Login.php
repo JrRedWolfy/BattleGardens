@@ -12,8 +12,8 @@
 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-                $this->datos['usuario'] = trim($_POST['usuario']);
-                $this->datos['clave'] = trim($_POST['pass']);
+                $this->datos['nickname'] = trim($_POST['nickname']);
+                $this->datos['clave'] = trim($_POST['clave']);
 
                 $usuarioSesion = $this->loginModelo->loginUsuario($this->datos);
 
