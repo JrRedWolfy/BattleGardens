@@ -5,13 +5,13 @@ class Inicio extends Controlador{
     public function __construct(){
         //echo 'Inicio controlador cargado';
 
-        //Sesion::iniciarSesion($this->datos);
+        Sesion::iniciarSesion($this->datos);
 
         $this->datos["menuActivo"] = "home";
 
         //$this->asesoriaModelo = $this->modelo('AsesoriaModelo');
 
-        //$this->datos["usuarioSesion"] = $this->asesoriaModelo->getPersona(1);
+        //$this->datos["usuarioSesion"] = $this->loginModelo->login_usuario;
 
         //$this->datos["usuarioSesion"]->roles = $this->asesoriaModelo->getRolesProfesor($this->datos["usuarioSesion"]->id_profesor);
         
@@ -42,9 +42,6 @@ class Inicio extends Controlador{
     }  
 
     public function login(){
-
-        echo "Hewo!!";
-        exit();
 
         $this->vista("login",$this->datos);
     }

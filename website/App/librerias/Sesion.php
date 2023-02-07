@@ -10,7 +10,7 @@
             session_regenerate_id();
 
             $_SESSION["usuarioSesion"] = $usuarioSesion;
-
+            
         }
 
         public static function iniciarSesion(&$datos = []){

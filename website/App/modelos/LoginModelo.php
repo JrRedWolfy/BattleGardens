@@ -6,14 +6,11 @@
             $this->db = new Base;
         }
 
-        public function loginUsuario($datos){
+        public function login_usuario($datos){
             $this->db->query("SELECT * FROM usuario WHERE nickname = :nickname AND clave = sha2(:clave,256)");
         
             $this->db->bind(':nickname', $datos['nickname']);
             $this->db->bind(':clave', $datos['clave']);
-
-            print_r($this->db->registro());
-            exit();
     
             return $this->db->registro();
 

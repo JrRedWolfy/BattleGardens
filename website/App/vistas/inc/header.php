@@ -27,7 +27,7 @@
       </a>
     </div>
     
-      <button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>">Cerrar Sesion</a></button>
+      <button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/login/logout">Cerrar Sesion</a></button>
       
     
 </nav>
