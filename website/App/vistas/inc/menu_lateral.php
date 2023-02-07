@@ -11,6 +11,12 @@
 <div>
     <div>
 
+        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>">Usuarios</a>
+
+    </div>
+
+    <div>
+
         <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>">Eventos</a>
 
     </div>
@@ -27,15 +33,11 @@
 
     </div>
 
+    
+
     <div>
 
         <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>">Historias</a>
-
-    </div>
-
-    <div>
-
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>">Usuarios</a>
 
     </div>
 
