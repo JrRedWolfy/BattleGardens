@@ -8,7 +8,7 @@
         return date("d/m/Y H:i:s", strtotime($fechaIngles));
     }
 
-    function tienePrivilegios($rol, $permitidos){
+    function tiene_permiso($rol, $permitidos){
     
         if(empty($permitidos) || in_array($rol, $permitidos)){
             return true;
