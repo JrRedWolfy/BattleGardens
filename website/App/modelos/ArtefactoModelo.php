@@ -9,7 +9,8 @@
         //Funciones de Artefacto
 
         public function new_artefacto(){
-            // Crear Artefacto
+            
+            
         }
 
         public function del_artefacto(){
