@@ -1,5 +1,5 @@
 <?php
-    class ArtefactoModelo{
+    class MundoModelo{
         private $db;
 
         // Habra que actualizar las funciones actuales con el atributo Imagen
