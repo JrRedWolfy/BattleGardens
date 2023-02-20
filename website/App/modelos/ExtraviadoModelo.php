@@ -7,6 +7,32 @@
         }
 
         //Funciones de Extraviado
+ 
+       public function get_extraviados(){
+            // Conseguir Extraviado(No Final)   
+            $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, a.origen as origen, a.titulo as titulo, 
+                a.ingenio as ingenio, a.sigilo as sigilo, a.fuerza as fuerza, img_color as color, img_bw as bw, a.valor as valor,
+                a.fecha as fecha, p.id_progreso as progreso
+                FROM extraviado a, progreso p
+                WHERE a.id_progreso = p.id_progreso
+                ORDER BY a.id_progreso");
+
+            return $this->db->registros();
+        }
+
+        public function get_extraviado($id){
+            // Conseguir Extraviado(No Final)
+            $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, a.origen as origen, a.titulo as titulo, 
+                a.ingenio as ingenio, a.sigilo as sigilo, a.fuerza as fuerza, img_color as color, img_bw as bw, a.valor as valor,
+                a.fecha as fecha, p.id_progreso as progreso
+                FROM extraviado a, progreso p
+                WHERE a.id_progreso = p.id_progreso, a.id_extraviado = :id
+                ORDER BY a.fecha");
+
+                $this->db->bind(':id', $id);
+
+            return $this->db->registro();  
+        }
 
         public function new_extraviado($sheet, $creador){
             // Crear Extraviado !!!! FALTA EL CREADOR EN LA TABLA
@@ -93,10 +119,6 @@
 
         public function give_extraviado(){
             // Dar Extraviado a un jugador
-        }
-
-        public function get_extraviado(){
-            // Conseguir Extraviado(No Final)   
         }
 
         public function add_relaccion($extraviado, $id_group){

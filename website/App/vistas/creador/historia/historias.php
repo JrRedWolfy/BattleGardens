@@ -2,7 +2,7 @@
 
 
 <h1>Historias :3</h1>
-
+<?php print_r($datos["total_historias"]) ?>
 
 
 

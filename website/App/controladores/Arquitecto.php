@@ -9,6 +9,7 @@ class Arquitecto extends Controlador{
 
         $this->datos["menuActivo"] = "home";
 
+        $this->usuarioModelo = $this->modelo('UsuarioModelo');
         $this->eventoModelo = $this->modelo('EventoModelo');
         $this->artefactoModelo = $this->modelo('ArtefactoModelo');
         $this->extraviadoModelo = $this->modelo('ExtraviadoModelo');
@@ -47,37 +48,72 @@ class Arquitecto extends Controlador{
 
     public function vista_artefacto(){
         
+        $this->datos["total_artefactos"] = $this->artefactoModelo->get_artefactos();
+
         $this->vista("creador/artefacto/artefactos",$this->datos);
     }  
 
     public function vista_evento(){
+
+        $this->datos["total_eventos"] = $this->eventoModelo->get_eventos();
         
         $this->vista("creador/evento/eventos",$this->datos);
     }  
 
     public function vista_extraviado(){
+
+        $this->datos["total_extraviados"] = $this->extraviadoModelo->get_extraviados();
         
         $this->vista("creador/extraviado/extraviados",$this->datos);
     }  
 
     public function vista_historia(){
+
+        $this->datos["total_historias"] = $this->historiaModelo->get_historias();
         
         $this->vista("creador/historia/historias",$this->datos);
     }  
 
     public function vista_mundo(){
+
+        $this->datos["total_mundos"] = $this->mundoModelo->get_mundos();
         
         $this->vista("creador/mundo/mundos",$this->datos);
     }  
 
     public function vista_publicacion(){
+
+        $this->datos["total_publicaciones"] = $this->publicacionModelo->get_publicaciones();
         
         $this->vista("creador/publicacion/publicaciones",$this->datos);
     }  
 
     public function vista_usuario(){
+
+        $this->datos["total_usuarios"] = $this->usuarioModelo->get_usuarios();
         
         $this->vista("creador/usuario/usuarios",$this->datos);
     }  
+
+    // ARTEFACTOS
+
+
+    // EVENTOS
+
+
+    // EXTRAVIADOS
+
+
+    // HISTORIAS
+
+
+    // MUNDOS
+
+
+    // PUBLICACIONES
+
+
+    // USUARIOS
+
 
 }

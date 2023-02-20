@@ -14,7 +14,7 @@
 
             $this->db->query("SELECT a.id_artefacto as id, a.img_artefacto as img, a.nombre as nombre, a.plus_ingenio as pi, a.plus_sigilo as ps, a.plus_fuerza as pf, a.valor as valor, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
                 FROM artefacto a, progreso p
-                WHERE a.id_progreso = e.id_progreso
+                WHERE a.id_progreso = p.id_progreso
                 ORDER BY a.fecha");
 
             return $this->db->registros();
