@@ -90,6 +90,7 @@ class Arquitecto extends Controlador{
 
     public function vista_usuario(){
 
+
         $this->datos["total_usuarios"] = $this->usuarioModelo->get_usuarios();
         
         $this->vista("creador/usuario/usuarios",$this->datos);
