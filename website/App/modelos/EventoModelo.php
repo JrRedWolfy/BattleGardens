@@ -10,7 +10,7 @@
 
         public function get_eventos(){
             // Conseguir artefacto(No Final) 
-            $this->db->query("SELECT a.id_evento as id, a.img_artefacto as img, a.nombre as nombre, a.plus_ingenio as pi, a.plus_sigilo as ps, a.plus_fuerza as pf, a.valor as valor, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
+            $this->db->query("SELECT e.id_evento as id, e.creador as creador, e.fecha as fecha, p.id_progreso as progreso
                 FROM evento e, progreso p
                 WHERE e.id_progreso = p.id_progreso
                 ORDER BY a.id_progreso");

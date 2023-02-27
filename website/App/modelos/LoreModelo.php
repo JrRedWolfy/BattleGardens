@@ -8,6 +8,14 @@
 
         //Funciones de Lore
 
+        public function get_historias(){
+
+            $this->db->query("SELECT * FROM historia");
+
+            return $this->db->registros();
+        }
+
+
         public function new_Story($sheet, $creador){
             // Crear Relato
             $this->db->query("INSERT INTO historia (titulo, contenido, autor, fecha, id_progreso)

@@ -8,6 +8,15 @@
 
         //Funciones de Ronda
 
+
+
+        public function get_conclusion($activador){
+            
+
+        }
+
+
+
     }
 
 ?>

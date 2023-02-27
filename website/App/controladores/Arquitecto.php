@@ -14,6 +14,7 @@ class Arquitecto extends Controlador{
         $this->artefactoModelo = $this->modelo('ArtefactoModelo');
         $this->extraviadoModelo = $this->modelo('ExtraviadoModelo');
         $this->loreModelo = $this->modelo('LoreModelo');
+        $this->mundoModelo = $this->modelo('MundoModelo');
         $this->publicacionModelo = $this->modelo('PublicacionModelo');
 
         //$this->datos["usuarioSesion"] = $this->loginModelo->login_usuario;
@@ -54,9 +55,9 @@ class Arquitecto extends Controlador{
     }  
 
     public function vista_evento(){
-
-        $this->datos["total_eventos"] = $this->eventoModelo->get_eventos();
         
+        //$this->datos["total_eventos"] = $this->eventoModelo->get_eventos();
+       
         $this->vista("creador/evento/eventos",$this->datos);
     }  
 
@@ -69,7 +70,7 @@ class Arquitecto extends Controlador{
 
     public function vista_historia(){
 
-        $this->datos["total_historias"] = $this->historiaModelo->get_historias();
+        $this->datos["total_historias"] = $this->loreModelo->get_historias();
         
         $this->vista("creador/historia/historias",$this->datos);
     }  
@@ -90,6 +91,7 @@ class Arquitecto extends Controlador{
 
     public function vista_usuario(){
 
+        $this->datos["tipos_usuario"] = $this->usuarioModelo->get_tipos();
 
         $this->datos["total_usuarios"] = $this->usuarioModelo->get_usuarios();
         
@@ -110,11 +112,42 @@ class Arquitecto extends Controlador{
 
     // MUNDOS
 
+    public function add_mundo(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            if($this->mundoModelo->new_mundo($sheet)){
+                redireccionar("/arquitecto/vista_mundo");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            echo "WTF?";
+        }
+    }
 
     // PUBLICACIONES
 
 
     // USUARIOS
+
+    public function add_usuario(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            if($this->usuarioModelo->new_usuario($sheet)){
+                redireccionar("/arquitecto/vista_usuario");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            echo "WTF?";
+        }
+    }
 
 
 }
