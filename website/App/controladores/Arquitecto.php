@@ -102,9 +102,48 @@ class Arquitecto extends Controlador{
 
 
     // EVENTOS
+    public function add_evento($id = 0){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            if($this->mundoModelo->new_mundo($sheet)){
+                redireccionar("/arquitecto/vista_evento");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            if ($id == 0) {
+                $this->vista("/creador/evento/evento_detalle", $this->datos);
+            } else {
+                echo "Aqui editamos el evento pertinente";
+            }
+        }
+    }
 
 
     // EXTRAVIADOS
+
+    public function add_extraviado($id = 0){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            if($this->mundoModelo->new_mundo($sheet)){
+                redireccionar("/arquitecto/vista_extraviado");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            if ($id == 0) {
+                $this->vista("/creador/extraviado/extraviado_detalle", $this->datos);
+            } else {
+                echo "Aqui editamos el extraviado pertinente";
+            }
+        }
+    }
 
 
     // HISTORIAS
