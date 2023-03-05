@@ -38,15 +38,36 @@ CONSTRAINT FK2 FOREIGN KEY (id_letra) references letra (id_letra) on delete rest
 
 create table usuario(
 nickname varchar(30) primary key,
+img_perfil varchar(300) not null,
 email varchar(100) not null,
 clave varchar(256) not null,
 ryoz int not null default 0, 
 id_rol int not null,
 id_preferencias int default null,
 ultima_sesion date default null,
+inhabilitado boolean default 0,
 
 CONSTRAINT FK3 FOREIGN KEY (id_preferencias) references preferencias (id_preferencias) on delete restrict on update cascade,
 CONSTRAINT FK4 FOREIGN KEY (id_rol) references tipo_user (id_rol) on delete restrict on update cascade
+);
+
+create table sombrero(
+id_sombrero int primary key auto_increment,
+nombre varchar(30) not null,
+img_sombrero varchar(300) not null,
+img_equipado varchar(300) not null,
+descripcion varchar(150) not null,
+codigo varchar(200)
+);
+
+create table logro(
+nickname varchar(30),
+id_sombrero int,
+fecha date,
+
+primary key(nickname, id_sombrero),
+CONSTRAINT FKO8 FOREIGN KEY (nickname) references usuario (nickname) on delete restrict on update cascade,
+CONSTRAINT FKO9 FOREIGN KEY (id_sombrero) references sombrero (id_sombrero) on delete restrict on update cascade
 );
 
 create table juego(
@@ -64,25 +85,40 @@ nickname varchar(30) not null,
 CONSTRAINT FK5 FOREIGN KEY (nickname) references usuario (nickname) on delete restrict on update cascade
 );
 
+create table rareza(
+id_rareza int primary key auto_increment,
+nombre varchar(25),
+indice_rareza int not null
+);
+
 create table progreso(
 id_progreso int primary key auto_increment,
 nombre varchar(16) not null
 );
-alter table progreso auto_increment=0;
+
+create table obtencion(
+id_obtencion int primary key auto_increment,
+nombre varchar(30) not null,
+valor int
+);
 
 create table artefacto(
 id_artefacto int primary key auto_increment,
+id_obtencion int not null,
+id_rareza int not null,
 img_artefacto varchar(250) not null,
 nombre varchar(30) not null,
 plus_ingenio int not null default 0,
 plus_sigilo int not null default 0,
 plus_fuerza int not null default 0,
-valor int not null,
 autor varchar(30) not null,
 fecha date not null,
 id_progreso int not null,
+inhabilitado boolean default 0,
 
 CONSTRAINT FK6 FOREIGN KEY(id_progreso)  REFERENCES progreso (id_progreso) ON UPDATE CASCADE ON DELETE RESTRICT,
+CONSTRAINT FKA5 FOREIGN KEY(id_rareza)  REFERENCES rareza (id_rareza) ON UPDATE CASCADE ON DELETE RESTRICT,
+CONSTRAINT FKA6 FOREIGN KEY(id_obtencion)  REFERENCES obtencion (id_obtencion) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK7 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT 
 );
 
@@ -104,6 +140,7 @@ descripcion varchar(240) not null
 
 create table extraviado(
 id_extraviado int primary key auto_increment,
+id_rareza int not null,
 nombre int not null,
 origen int not null,
 titulo int not null,
@@ -116,6 +153,7 @@ valor int not null default 0,
 fecha date not null,
 id_progreso int not null,
 
+CONSTRAINT FKB5 FOREIGN KEY(id_rareza)  REFERENCES rareza (id_rareza) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK10 FOREIGN KEY(origen)  REFERENCES mundo (id_mundo) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK11 FOREIGN KEY(id_progreso)  REFERENCES progreso (id_progreso) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -138,12 +176,14 @@ CONSTRAINT FK15 FOREIGN KEY (id_juego) references juego (id_juego) on delete res
 
 create table historia(
 id_historia int primary key,
+id_mundo int not null,
 titulo varchar(30) not null,
 contenido varchar(500) not null,
 autor varchar(30) not null,
 fecha date not null,
 id_progreso int not null,
 
+CONSTRAINT FKA16 FOREIGN KEY(id_mundo)  REFERENCES mundo (id_mundo) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK16 FOREIGN KEY(id_progreso)  REFERENCES progreso (id_progreso) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK17 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT     
 );
@@ -173,11 +213,18 @@ CONSTRAINT FK20 FOREIGN KEY (id_juego, id_extra_det) references extraviado_detal
 CONSTRAINT FK21 FOREIGN KEY (id_estado) references estado_extra (id_estado) on delete restrict on update cascade
 );
 
+create table estado_maquina(
+id_estado_maquina int primary key auto_increment,
+nombre varchar(30) not null
+);
+
 create table maquina(
 id_maquina int primary key auto_increment,
 nombre varchar(30) not null,
-estado varchar(24) not null default 'Operativa',
-porcentaje int not null default 100
+id_estado_maquina int not null,
+porcentaje int not null default 100,
+
+CONSTRAINT FKA21 FOREIGN KEY (id_estado_maquina) references estado_maquina (id_estado_maquina) on delete restrict on update cascade
 );
 
 create table tipo_evento(
@@ -185,11 +232,19 @@ id_tipo_evento int primary key auto_increment,
 nombre varchar(24) not null
 );
 
+create table elemento(
+id_elemento int primary key auto_increment,
+nombre varchar(30) not null,
+imagen_elemento varchar(200) not null,
+imagen_bw varchar(200) not null
+);
+
 create table activador(
 id_activador int primary key auto_increment,
-nombre varchar(30) not null,
-imagen_activador varchar(200) not null,
-imagen_bw varchar(200) not null
+id_elemento int not null,
+valor int,
+
+CONSTRAINT FKG21 FOREIGN KEY (id_elemento) references elemento (id_elemento) on delete restrict on update cascade
 );
 
 create table evento_detalle(
@@ -219,6 +274,7 @@ create table tipo_publicacion(
 id_tipo_publi int primary key auto_increment,
 nombre varchar(24) not null,
 id_extraviado int,
+valoracion int,
 
 CONSTRAINT FK27 FOREIGN KEY(id_extraviado)  REFERENCES extraviado (id_extraviado) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -226,7 +282,8 @@ CONSTRAINT FK27 FOREIGN KEY(id_extraviado)  REFERENCES extraviado (id_extraviado
 create table publicacion(
 id_publicacion int primary key auto_increment,
 id_progreso int not null,
-titulo varchar(32) not null,
+titulo varchar(35) not null,
+concepto varchar(35), /*Deberia crear una tabla para conceptos??*/
 contenido varchar(400) not null,
 imagen varchar(200),
 autor varchar(30) not null,
@@ -241,6 +298,7 @@ CONSTRAINT FK30 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASC
 create table relacciones(
 id_extraviado int,
 id_conocido int,
+motivo varchar(300) not null,
 
 primary key(id_extraviado, id_conocido),
 CONSTRAINT FK31 FOREIGN KEY(id_extraviado)  REFERENCES extraviado (id_extraviado) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -272,12 +330,6 @@ CONSTRAINT FK35 FOREIGN KEY (id_requisito) references requisito (id_requisito) o
 CONSTRAINT FK36 FOREIGN KEY (id_evento) references evento (id_evento) on delete restrict on update cascade
 );
 
-create table recurso(
-id_recurso int primary key auto_increment,
-nombre varchar(24) not null,
-img_color varchar(250) not null
-);
-
 create table conclusion(
 id_conclusion int primary key auto_increment,
 texto varchar(500) not null,
@@ -287,14 +339,14 @@ id_activador int not null,
 CONSTRAINT FK37 FOREIGN KEY (id_evento, id_activador) references evento (id_evento, id_activador) on delete restrict on update cascade
 );
 
-create table recurso_conclusion(
+create table elemento_conclusion(
 id_conclusion int,
-id_recurso int,
-cantidad int not null default 0,
-accion varchar(6) not null default 'Perder',
+id_elemento int,
+cantidad int not null default 1,
+accion boolean default 0,
 
-primary key(id_conclusion, id_recurso),
-CONSTRAINT FK38 FOREIGN KEY (id_recurso) references recurso (id_recurso) on delete restrict on update cascade,
+primary key(id_conclusion, id_elemento),
+CONSTRAINT FK38 FOREIGN KEY (id_elemento) references elemento (id_elemento) on delete restrict on update cascade,
 CONSTRAINT FK39 FOREIGN KEY (id_conclusion) references conclusion (id_conclusion) on delete restrict on update cascade
 );
 
