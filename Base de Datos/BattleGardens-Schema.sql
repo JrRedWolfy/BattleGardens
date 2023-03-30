@@ -56,8 +56,8 @@ id_sombrero int primary key auto_increment,
 nombre varchar(30) not null,
 img_sombrero varchar(300) not null,
 img_equipado varchar(300) not null,
-descripcion varchar(150) not null,
-codigo varchar(200)
+descripcion varchar(500) not null,
+codigo varchar(500)
 );
 
 create table logro(
@@ -72,11 +72,11 @@ CONSTRAINT FKO9 FOREIGN KEY (id_sombrero) references sombrero (id_sombrero) on d
 
 create table juego(
 id_juego int primary key auto_increment,
-ronda int not null default 0,
+ronda_total int not null default 0,
 aventura int not null default 0,
-ryoz int not null default 2,
-chatarra int not null default 3,
-suministro int not null default 3,
+ryoz int not null default 0,
+chatarra int not null default 0,
+suministro int not null default 0,
 ryoz_total int not null default 0,
 chatarra_total int not null default 0,
 suministro_total int not null default 0,
@@ -141,17 +141,17 @@ descripcion varchar(240) not null
 create table extraviado(
 id_extraviado int primary key auto_increment,
 id_rareza int not null,
-nombre int not null,
+nombre varchar(80) not null,
 origen int not null,
-titulo int not null,
-ingenio int not null default 0,
-sigilo int not null default 0,
+titulo varchar(80) not null,
+conviccion int not null default 0,
 fuerza int not null default 0,
+inteligencia int not null default 0,
 img_color varchar(250) not null,
 img_bw varchar(250) not null,
-valor int not null default 0,
+valor int not null default 1,
 fecha date not null,
-id_progreso int not null,
+id_progreso int not null default 2,
 
 CONSTRAINT FKB5 FOREIGN KEY(id_rareza)  REFERENCES rareza (id_rareza) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK10 FOREIGN KEY(origen)  REFERENCES mundo (id_mundo) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -208,7 +208,7 @@ id_estado int,
 id_extra_det int,
 id_juego int,
 
-primary key(id_estado, id_extra_det),
+primary key(id_estado, id_extra_det, id_juego),
 CONSTRAINT FK20 FOREIGN KEY (id_juego, id_extra_det) references extraviado_detalle (id_juego, id_extra_det) on delete restrict on update cascade,
 CONSTRAINT FK21 FOREIGN KEY (id_estado) references estado_extra (id_estado) on delete restrict on update cascade
 );
@@ -242,7 +242,7 @@ imagen_bw varchar(200) not null
 create table activador(
 id_activador int primary key auto_increment,
 id_elemento int not null,
-valor int,
+valor int default null,
 
 CONSTRAINT FKG21 FOREIGN KEY (id_elemento) references elemento (id_elemento) on delete restrict on update cascade
 );
@@ -343,6 +343,7 @@ create table elemento_conclusion(
 id_conclusion int,
 id_elemento int,
 cantidad int not null default 1,
+cantidad_max int not null default 1,
 accion boolean default 0,
 
 primary key(id_conclusion, id_elemento),

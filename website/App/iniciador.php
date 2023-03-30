@@ -5,13 +5,14 @@
         error_reporting(E_ALL);
     //**Desarollo */
 
+//require_once 'librerias/Base.php';
+//require_once 'librerias/Controlador.php';
+//require_once 'librerias/Core.php';
 
 //Cargamos librerias
 require_once 'helpers/funciones.php';
 require_once 'config/configurar.php';
-require_once 'librerias/Base.php';
-require_once 'librerias/Controlador.php';
-require_once 'librerias/Core.php';
+
 
 //Autoload php IMPORTANTE
 spl_autoload_register(function($nombreClase){
