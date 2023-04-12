@@ -9,7 +9,6 @@
         
         public function index($error =''){
 
-
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                 $this->datos['nickname'] = trim($_POST['nickname']);
@@ -20,6 +19,7 @@
                 if(isset($usuarioSesion) && !empty($usuarioSesion)){  //Si tiene datos el objeto devuelto entramos
                     
                     Sesion::crearSesion($usuarioSesion);
+                    $this->loginModelo->refresh_last_conecttion($usuarioSesion["nickname"]);
 
                     redireccionar('/inicio');
                 } else{
@@ -32,6 +32,7 @@
 
 
                 if(Sesion::sesionCreada()){  //si ya estamos logueados redireccionamos
+                    $this->loginModelo->refresh_last_conecttion($usuarioSesion["nickname"]);
                     redireccionar('/inicio');
 
                 }

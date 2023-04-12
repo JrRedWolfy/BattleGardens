@@ -16,5 +16,20 @@
             return $this->db->registro();
 
         }
+
+        // Funcion para dejar constancia de cuando fue la ultima vez que se conecto un usuario
+        public function refresh_last_conecttion($id){
+            $this->db->query("UPDATE usuario SET ultima_sesion = DATE(NOW())
+                WHERE nickname = :nickname");
+        
+            $this->db->bind(':nickname', $id);
+    
+            if ($this->db->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 ?>

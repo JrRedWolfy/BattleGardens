@@ -11,9 +11,9 @@
     <h2>Evento</h2>
     <form action="">
 
-        <input type="text" name="titulo" placeholder="Titulo">
+        <input type="text" name="titulo" value="<?php echo $this->datos['evento']->titulo?>" placeholder="Titulo">
 
-        <textarea name="contenido" id=""></textarea>
+        <textarea name="contenido" id=""><?php echo $this->datos["evento"]->contenido?></textarea>
 
         <button type="submit" class="verde"><i class="fa fa-save"></i>Guardar</button>
     </form>

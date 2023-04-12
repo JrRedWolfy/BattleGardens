@@ -128,14 +128,13 @@ INSERT INTO tipo_evento (id_tipo_evento, nombre) VALUES
 (1, "Inicio"),
 (2, "Aventura"),
 (3, "Historia"),
-(4, "Final"),
-(5, "Exito");
+(4, "Enlace");
 
-INSERT INTO evento_detalle (id_det_evento, contenido, autor, fecha, id_progreso) VALUES
-(1, "Tras escapar de la Organización de Salvaguarda Temporal...", "Howler", "2023-03-28", 3);
+INSERT INTO evento_detalle (id_tipo_evento, titulo, contenido, autor, fecha, id_progreso) VALUES
+(1, "OST-ini", "Tras escapar de la Organización de Salvaguarda Temporal...", "Howler", "2023-03-28", 3);
 
-INSERT INTO evento (id_evento, id_activador, id_det_evento, id_tipo_evento) VALUES
-(1, 2, 1, 1);
+INSERT INTO evento (id_evento, id_activador) VALUES
+(1, 2);
 
 INSERT INTO conclusion (id_conclusion, texto, id_evento, id_activador) VALUES
 (1, "Escriba aquí la conclusión del evento", 1, 2);

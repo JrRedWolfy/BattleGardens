@@ -108,9 +108,10 @@ id_obtencion int not null,
 id_rareza int not null,
 img_artefacto varchar(250) not null,
 nombre varchar(30) not null,
-plus_ingenio int not null default 0,
-plus_sigilo int not null default 0,
+plus_carisma int not null default 0,
 plus_fuerza int not null default 0,
+plus_inteligencia int not null default 0,
+plus_infortuna int not null default 0,
 autor varchar(30) not null,
 fecha date not null,
 id_progreso int not null,
@@ -144,9 +145,10 @@ id_rareza int not null,
 nombre varchar(80) not null,
 origen int not null,
 titulo varchar(80) not null,
-conviccion int not null default 0,
+carisma int not null default 0,
 fuerza int not null default 0,
 inteligencia int not null default 0,
+infortuna int not null default 0,
 img_color varchar(250) not null,
 img_bw varchar(250) not null,
 valor int not null default 1,
@@ -248,26 +250,27 @@ CONSTRAINT FKG21 FOREIGN KEY (id_elemento) references elemento (id_elemento) on 
 );
 
 create table evento_detalle(
-id_det_evento int primary key auto_increment, 
+id_evento int primary key auto_increment,
+id_tipo_evento int not null,
+titulo varchar(80) not null, 
 contenido varchar(500) not null,
 autor varchar(30) not null,
 fecha date not null,
+ultima_mod date default null,
 id_progreso int not null,
 
 CONSTRAINT FK22 FOREIGN KEY(id_progreso)  REFERENCES progreso (id_progreso) ON UPDATE CASCADE ON DELETE RESTRICT,
-CONSTRAINT FK23 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT
+CONSTRAINT FK23 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT,
+CONSTRAINT FK26 FOREIGN KEY (id_tipo_evento) references tipo_evento (id_tipo_evento) on delete restrict on update cascade
 );
 
 create table evento(
 id_evento int,
 id_activador int,
-id_det_evento int not null,
-id_tipo_evento int not null,
 
 primary key(id_evento, id_activador),
-CONSTRAINT FK24 FOREIGN KEY(id_det_evento)  REFERENCES evento_detalle (id_det_evento) ON UPDATE CASCADE ON DELETE RESTRICT,
-CONSTRAINT FK25 FOREIGN KEY(id_activador)  REFERENCES activador (id_activador) ON UPDATE CASCADE ON DELETE RESTRICT,
-CONSTRAINT FK26 FOREIGN KEY (id_tipo_evento) references tipo_evento (id_tipo_evento) on delete restrict on update cascade
+CONSTRAINT FK24 FOREIGN KEY(id_evento)  REFERENCES evento_detalle (id_evento) ON UPDATE CASCADE ON DELETE RESTRICT,
+CONSTRAINT FK25 FOREIGN KEY(id_activador)  REFERENCES activador (id_activador) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 create table tipo_publicacion(

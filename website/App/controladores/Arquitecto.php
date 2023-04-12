@@ -56,7 +56,7 @@ class Arquitecto extends Controlador{
 
     public function vista_evento(){
         
-        //$this->datos["total_eventos"] = $this->eventoModelo->get_eventos();
+        $this->datos["total_eventos"] = $this->eventoModelo->get_eventos();
        
         $this->vista("creador/evento/eventos",$this->datos);
     }  
@@ -104,6 +104,8 @@ class Arquitecto extends Controlador{
     // EVENTOS
     public function add_evento($id = 0){
 
+        $this->datos["evento"] = $this->eventoModelo->get_evento($id);
+
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;
 
@@ -115,9 +117,11 @@ class Arquitecto extends Controlador{
   
         } else {
             if ($id == 0) {
+
                 $this->vista("/creador/evento/evento_detalle", $this->datos);
             } else {
-                echo "Aqui editamos el evento pertinente";
+
+                $this->vista("/creador/evento/evento_detalle", $this->datos);
             }
         }
     }
