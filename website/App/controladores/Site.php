@@ -3,6 +3,8 @@
 
         public function __construct(){
 
+            Sesion::iniciarSesion($this->datos);
+
             $this->loginModelo = $this->modelo('LoginModelo');
 
         }
@@ -30,22 +32,21 @@
 
             }else{
 
-
-                //if(Sesion::sesionCreada()){  //si ya estamos logueados redireccionamos
-                    //redireccionar('/');
-
-                //}
-
-               $this->datos['error'] = $error;
-
-               $this->vista('login', $this->datos);
+               redireccionar("/inicio");
             }
         }
 
+        public function noticias(){
 
-        public function logout(){
-            Sesion::cerrarSesion();
-            redireccionar('/inicio');
+            $this->vista("/navegacion/news/menu", $this->datos);
+        }
+
+        public function universo(){
+            $this->vista("/navegacion/universo/menu", $this->datos);
+        }
+
+        public function comunidad(){
+            $this->vista("/navegacion/comunidad/menu", $this->datos);
         }
 
     }

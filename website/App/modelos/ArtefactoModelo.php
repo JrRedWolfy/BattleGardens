@@ -12,7 +12,7 @@
         public function get_artefactos(){
             // Conseguir todos los Artefactos
 
-            $this->db->query("SELECT a.id_artefacto as id, a.img_artefacto as img, a.nombre as nombre, a.plus_ingenio as pi, a.plus_sigilo as ps, a.plus_fuerza as pf, a.valor as valor, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
+            $this->db->query("SELECT a.id_artefacto as id, a.img_artefacto as img, a.nombre as nombre, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_infortuna as ps, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
                 FROM artefacto a, progreso p
                 WHERE a.id_progreso = p.id_progreso
                 ORDER BY a.fecha");

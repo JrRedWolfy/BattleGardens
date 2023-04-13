@@ -11,7 +11,7 @@
        public function get_extraviados(){
             // Conseguir Extraviado(No Final)   
             $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, a.origen as origen, a.titulo as titulo, 
-                a.ingenio as ingenio, a.sigilo as sigilo, a.fuerza as fuerza, img_color as color, img_bw as bw, a.valor as valor,
+                a.carisma as carisma, a.fuerza as fuerza, a.inteligencia as inteligencia, a.infortuna as suerte, img_color as color, img_bw as bw, a.valor as valor,
                 a.fecha as fecha, p.id_progreso as progreso
                 FROM extraviado a, progreso p
                 WHERE a.id_progreso = p.id_progreso
@@ -117,8 +117,19 @@
             }
         }
 
-        public function give_extraviado(){
+        public function give_extraviado($player, $extraviado){
             // Dar Extraviado a un jugador
+
+            $this->db->query("INSERT INTO desbloqueados(nickname, id_extraviado, fecha) VALUES (:player, :id, DATE(NOW()))");
+
+            $this->db->bind(":player", $player);
+            $this->db->bind(":id", $extraviado);
+
+            if ($this->db->execute()){
+                return  true;
+            } else {
+                return false;
+            }
         }
 
         public function add_relaccion($extraviado, $id_group){

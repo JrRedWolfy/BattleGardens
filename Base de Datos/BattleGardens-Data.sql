@@ -24,6 +24,7 @@ INSERT INTO letra (letra) VALUES
 ("LRG");
 
 INSERT INTO usuario (nickname, img_perfil, email, clave, id_rol) VALUES
+("Time Anomaly", "", "", "", 5),
 ("Howler", "", "RedCatter554@gmail.com", SHA2("Howler", 256), 1),
 ("Kyle", "", "davidlucealafaja@gmail.com", SHA2("Kyle", 256), 2),
 ("Maddox", "", "pinkfloid478@gmail.com",SHA2("Maddox", 256), 3),

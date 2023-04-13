@@ -102,7 +102,7 @@ class Arquitecto extends Controlador{
 
 
     // EVENTOS
-    public function add_evento($id = 0){
+    public function add_evento($id = 1){
 
         $this->datos["evento"] = $this->eventoModelo->get_evento($id);
 
@@ -129,7 +129,7 @@ class Arquitecto extends Controlador{
 
     // EXTRAVIADOS
 
-    public function add_extraviado($id = 0){
+    public function add_extraviado($id = 1){
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;

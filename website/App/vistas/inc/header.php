@@ -22,10 +22,10 @@
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Universo</a></li>
-      <li><a href="#">Comunidad</a></li>
+      <li><a href="<?php echo RUTA_URL?>/site">Home</a></li>
+      <li><a href="<?php echo RUTA_URL?>/site/noticias">News</a></li>
+      <li><a href="<?php echo RUTA_URL?>/site/universo">Universo</a></li>
+      <li><a href="<?php echo RUTA_URL?>/site/comunidad">Comunidad</a></li>
     </ul>
     
       <button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/login/logout">Cerrar Sesion</a></button>
