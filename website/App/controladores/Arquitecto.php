@@ -100,6 +100,35 @@ class Arquitecto extends Controlador{
 
     // ARTEFACTOS
 
+    public function add_artefacto($id = 1){
+
+        $this->datos["artefacto"] = $this->artefactoModelo->get_artefacto($id);
+        $this->datos["rarezas"] = $this->artefactoModelo->get_rarezas();
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            print_r($sheet);
+            exit();
+
+
+            if($this->mundoModelo->new_mundo($sheet)){
+                redireccionar("/arquitecto/vista_evento");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            if ($id == 1) {
+
+                $this->vista("/creador/artefacto/artefacto_detalle", $this->datos);
+            } else {
+
+                echo "ni idea de como llegaste aqui compañero Historico";
+            }
+        }
+    }
+
 
     // EVENTOS
     public function add_evento($id = 1){
@@ -116,12 +145,12 @@ class Arquitecto extends Controlador{
             }
   
         } else {
-            if ($id == 0) {
+            if ($id == 1) {
 
                 $this->vista("/creador/evento/evento_detalle", $this->datos);
             } else {
 
-                $this->vista("/creador/evento/evento_detalle", $this->datos);
+                echo "ni idea de como has llegado aqui compañero";
             }
         }
     }
@@ -151,6 +180,38 @@ class Arquitecto extends Controlador{
 
 
     // HISTORIAS
+    public function add_historia($id = 1){
+
+        $this->datos["historia"] = $this->loreModelo->get_historia($id);
+
+        $this->datos["mundos"] = $this->mundoModelo->get_mundos_short();
+
+        $this->datos["involucrados"] = $this->loreModelo->get_implicados($id);
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            $autor = $this->datos["usuarioSesion"]->nickname;
+
+            if($this->loreModelo->new_story($sheet, $autor)){
+                redireccionar("/arquitecto/vista_historia");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            if ($id == 1) {
+                // CREAR NUEVO
+
+                $this->vista("/creador/historia/historia_detalle", $this->datos);
+            } else {
+                // EDITAR
+
+                $this->vista("/creador/historia/historia_detalle", $this->datos);
+            }
+        }
+    }
+
 
 
     // MUNDOS
@@ -172,6 +233,22 @@ class Arquitecto extends Controlador{
     }
 
     // PUBLICACIONES
+
+    public function add_publicacion(){
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $sheet = $_POST;
+
+            if($this->publicacionModelo->new_publicacion($sheet)){
+                redireccionar("/arquitecto/vista_publicacion");
+            } else {
+                echo "Ni se como llegue aqui";
+            }
+  
+        } else {
+            $this->vista("/creador/historia/publicacion_detalle", $this->datos);
+        }
+    }
 
 
     // USUARIOS

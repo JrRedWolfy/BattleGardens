@@ -23,6 +23,6 @@
     //Configuración de la Base de datos
     define('DB_HOST', 'localhost');
     define('DB_USUARIO', 'root');
-    define('DB_PASSWORD', 'Salamence13');
+    define('DB_PASSWORD', '');
     define('DB_NOMBRE', 'battlegardens');
 ?>

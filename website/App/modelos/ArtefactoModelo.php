@@ -22,12 +22,12 @@
 
         public function get_artefacto($id){
             // Conseguir artefacto(No Final)
-            $this->db->query("SELECT a.id_artefacto as id, a.img_artefacto as img, a.nombre as nombre, a.plus_ingenio as pi, a.plus_sigilo as ps, a.plus_fuerza as pf, a.valor as valor, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
+            $this->db->query("SELECT a.id_artefacto as id, a.img_artefacto as img, a.nombre as nombre, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_infortuna as ps, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
                 FROM artefacto a, progreso p
-                WHERE a.id_progreso = e.id_progreso AND a.id_artefacto = :id
+                WHERE a.id_progreso = p.id_progreso AND a.id_artefacto = :id
                 ORDER BY a.fecha");
 
-                bind(":id", $id);
+                $this->db->bind(":id", $id);
 
             return $this->db->registro();   
         }
@@ -140,6 +140,14 @@
             }else{
                 return false;
             }
+        }
+
+        // DEVOLVER  RAREZAS
+        public  function get_rarezas(){
+
+            $this->db->query("SELECT id_rareza as id, nombre FROM rareza");
+
+            return $this->db->registros();
         }
 
         //!!  !!  !!  !!  !!  !!  !!

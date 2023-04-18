@@ -1,4 +1,84 @@
 
+/*MESA DEL ARQUITECTO*/
+
+.show{
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+/*SKILLS RATES*/
+
+.checked {
+    color: orange;
+}
+
+.star:hover {
+    color: red;
+}
+
+/*NAVBAR*/
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: white;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav li {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav li:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Add an active class to highlight the current page */
+  .topnav li.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  /* Hide the link that should open and close the topnav on small screens */
+  .topnav .icon {
+    display: none;
+  }
+
+
+
+  @media screen and (max-width: 600px) {
+    .topnav li:not(:first-child) {display: none;}
+    .topnav li.icon {
+      float: right;
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive li.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive li {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  }
+
+
 /*CSS de la CREACION de Elementos(Eventos)*/
 /*CSS de la CREACION de Elementos(Eventos)*/
 .work_box {
@@ -9,6 +89,8 @@
     grid-auto-rows: 100%;
     column-gap: 1%;
     row-gap: 1%;
+    border: 1px solid #00e621;
+    background-color: azure;
 }
 
 .one {
@@ -103,6 +185,16 @@ button{
         grid-row-end: 4;
     }
 }
+
+/*CSS de la CREACION de Elementos(Artefactos)*/
+
+.artefacto {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
 
 /*CSS del Menu Lateral de CREACION*/
 /*CSS del Menu Lateral de CREACION*/

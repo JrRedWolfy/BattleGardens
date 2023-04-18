@@ -10,21 +10,34 @@
 
         public function get_historias(){
 
-            $this->db->query("SELECT * FROM historia");
+            $this->db->query("SELECT h.id_historia as id, m.nombre as mundo, h.titulo, h.fecha, h.autor, p.nombre as progreso FROM historia h, mundo m, progreso p
+                            WHERE h.id_mundo = m.id_mundo AND h.id_progreso = p.id_progreso");
 
             return $this->db->registros();
         }
 
+        public function get_historia($id){
 
-        public function new_Story($sheet, $creador){
+            $this->db->query("SELECT h.id_historia as id, m.nombre as mundo, h.titulo, h.contenido, h.fecha, h.autor, p.nombre as progreso 
+                            FROM historia h, mundo m, progreso p
+                            WHERE h.id_mundo = m.id_mundo AND h.id_progreso = p.id_progreso AND h.id_historia = :id");
+
+                $this->db->bind(":id", $id);
+
+            return $this->db->registro();
+        }
+
+
+        public function new_story($sheet, $creador){
             // Crear Relato
-            $this->db->query("INSERT INTO historia (titulo, contenido, autor, fecha, id_progreso)
-                VALUES (:titulo, :contenido, :autor, NOW(), :progreso)");
+            $this->db->query("INSERT INTO historia (id_mundo, titulo, contenido, autor, fecha, id_progreso)
+                VALUES (:mundo, :titulo, :contenido, :autor, NOW(), :progreso)");
 
+            $this->db->bind(':mundo',trim($sheet['mundo']));
             $this->db->bind(':titulo',trim($sheet['titulo']));
             $this->db->bind(':contenido',trim($sheet['contenido']));
             $this->db->bind(':autor', $creador);
-            $this->db->bind(':progreso', "1"); // Poner el Estado En Proceso
+            $this->db->bind(':progreso', "2"); // Poner el Estado En Proceso
 
             if($this->db->execute()){
                 return true;
@@ -116,6 +129,17 @@
             } else {
                 return false;
             }
+        }
+
+        public function get_implicados($id){
+
+            $this->db->query("SELECT e.nombre as extraviado, e.titulo as apodo
+                            FROM historia h, lore l, extraviado e
+                            WHERE h.id_historia = l.id_historia AND l.id_extraviado = e.id_extraviado AND h.id_historia = :id");
+
+                $this->db->bind(":id", $id);
+
+            return $this->db->registros();
         }
 
         public function world_history(){

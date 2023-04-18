@@ -13,7 +13,12 @@
 
         <input type="text" name="titulo" value="<?php echo $this->datos['evento']->titulo?>" placeholder="Titulo">
 
-        <textarea name="contenido" id=""><?php echo $this->datos["evento"]->contenido?></textarea>
+        <textarea name="contenido" onkeyup="read_symbl(this);" id=""><?php echo $this->datos["evento"]->contenido?></textarea>
+
+        <i><img src="<?php echo RUTA_URL?>/img/symbol/ryoz32x.ico" height="16px" width="16px"></img></i>
+        <div id="resultado">
+
+        </div>
 
         <button type="submit" class="verde"><i class="fa fa-save"></i>Guardar</button>
     </form>

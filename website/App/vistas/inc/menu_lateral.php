@@ -14,68 +14,31 @@
 
 <?php else: ?>
 
-<h3>Mesa del <?php echo $datos["usuarioSesion"]->nombre?></h3>    
+<h3>Mesa del <?php echo $datos["usuarioSesion"]->nombre?></h3>  
 
-
-<div class="create_table">
-    <div class="side">
+<nav class="hide" id="architect_table">
+    <ul>
     <?php if (tiene_permiso($datos["usuarioSesion"]->id_rol, [1])): ?>
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_usuario">Usuarios</a>
-        </button>
-    </div>
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_usuario">Usuarios</a></li>
     <?php endif ?>
-
     <!--Todos-->
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_publicacion">Publicaciones</a>
-        </button>
-    </div>
-
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_publicacion">Publicaciones</a></li>
     <!--Todos-->
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_evento">Eventos</a>
-        </button>
-    </div>
-
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_evento">Eventos</a></li>
     <?php if (tiene_permiso($datos["usuarioSesion"]->id_rol, [1, 3])): ?>
     <!--Creador-->
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_extraviado">Extraviados</a>
-        </button>
-    </div>
-
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_extraviado">Extraviados</a></li>
     <!--Creador-->
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_artefacto">Artefactos</a>
-        </button>
-    </div>
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_artefacto">Artefactos</a></li>
     <?php endif ?>
-
     <?php if (tiene_permiso($datos["usuarioSesion"]->id_rol, [1, 2])): ?>
     <!--Lore Master-->
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_historia">Historias</a>
-        </button>
-    </div>
-
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_historia">Historias</a></li>
     <!--Lore Master-->
-    <div>
-        <button>
-        <a class="nav-link active" type="button" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_mundo">Mundos</a>
-        </button>
-    </div>
+        <li><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/arquitecto/vista_mundo">Mundos</a></li>
     <?php endif ?>
-    </div>
-    <br>
-    <br>
+  </ul>
+  
+</nav>
 
-
-</div>
 <?php endif ?>

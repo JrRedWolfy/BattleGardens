@@ -16,6 +16,13 @@
             return $this->db->registros();
         }
 
+        public function get_mundos_short(){
+            // Añadir la imagen cuando la haya.
+            $this->db->query("SELECT id_mundo as id, nombre FROM mundo");
+
+            return $this->db->registros();
+        }
+
         public function new_mundo($sheet, $creador){
 
             $this->db->query("INSERT INTO mundo(nombre, sobrenombre, descripcion) 
