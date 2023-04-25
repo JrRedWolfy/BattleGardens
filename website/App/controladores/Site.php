@@ -49,6 +49,11 @@
             $this->vista("/navegacion/comunidad/menu", $this->datos);
         }
 
+        public function profile(){
+            $this->vista("/navegacion/utiles/profile", $this->datos);
+        }
+
+
     }
 
 ?>

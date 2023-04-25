@@ -20,29 +20,23 @@
 </head>
 <body>
 
+<div class="topnav" id="myTopnav">
+  <a href="<?php echo RUTA_URL?>/site" class="active">Home</a>
+  <a href="<?php echo RUTA_URL?>/site/noticias">News</a>
+  <a href="<?php echo RUTA_URL?>/site/universo">Universo</a>
+  <a href="<?php echo RUTA_URL?>/site/comunidad">Comunidad</a>
+  <a href="#about">Soporte</a>
+  <div class="dropdown">
+    <button class="dropbtn"><a href="<?php echo RUTA_URL?>/site/profile"></a>
+      <i class="fa fa-user"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Editar Perfil</a>
+      <a href="#">Preferencias</a>
+      <a href="<?php echo RUTA_URL?>/login/logout">Cerrar Sesion</a>
+    </div>
+  </div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+</div>  
 
-
-<nav class="topnav" id="myTopnav">
-  <ul>
-    <li><a href="<?php echo RUTA_URL?>/site">Home</a></li>
-    <li><a href="<?php echo RUTA_URL?>/site/noticias">News</a></li>
-    <li><a href="<?php echo RUTA_URL?>/site/universo">Universo</a></li>
-    <li><a href="<?php echo RUTA_URL?>/site/comunidad">Comunidad</a></li>
-    <li><a href="<?php echo RUTA_URL?>/site/comunidad">Mi Perfil</a>
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
-        <li><a class="dropdown-item" href="#">Preferencias</a></li>
-        <li><a class="dropdown-item" href="<?php echo RUTA_URL?>/login/logout">Cerrar Sesion</a></li>
-      </ul>
-    </li>
-    <li class="icon" onclick="myFunction();"><i class="fa-solid fa-bars"></i></li>
-  </ul>
-  
-</nav>
- 
-<div onclick="mesa_arquitecto();">
-<i class="fa-solid fa-gear"></i>
-</div>
-    
-<button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>/login/logout">Cerrar Sesion</a></button>
-  
+<button onclick="mesa_arquitecto();">ROLES Powers</button>

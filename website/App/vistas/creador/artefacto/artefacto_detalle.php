@@ -10,31 +10,31 @@
         <br>
         <label for="">Carisma</label>
         <div class="rating">
-          <input id="carismaInput1" type="radio" name="carisma" value="1" hidden>
-          <label id="carisma1" class="star" name="carisma" value="1" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="carismaInput2" type="radio" name="carisma" value="2" checked="true" hidden>
-          <label id="carisma2" class="star" name="carisma" value="2" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="carismaInput3" type="radio" name="carisma" value="3" hidden>
-          <label id="carisma3" class="star" name="carisma" value="3" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="carismaInput4" type="radio" name="carisma" value="4" hidden>
-          <label id="carisma4" class="star" name="carisma" value="4" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="carismaInput5" type="radio" name="carisma" value="5" hidden>
-          <label id="carisma5" class="star" name="carisma" value="5" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="carInput1" type="radio" name="car" value="1" hidden>
+          <label id="car1" class="star" name="car" value="1" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="carInput2" type="radio" name="car" value="2" checked="true" hidden>
+          <label id="car2" class="star" name="car" value="2" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="carInput3" type="radio" name="car" value="3" hidden>
+          <label id="car3" class="star" name="car" value="3" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="carInput4" type="radio" name="car" value="4" hidden>
+          <label id="car4" class="star" name="car" value="4" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="carInput5" type="radio" name="car" value="5" hidden>
+          <label id="car5" class="star" name="car" value="5" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
         </div>
 
         <br>
         <label for="">Fuerza</label>
         <div class="rating">
-          <input id="fuerzaInput1" type="radio" name="fuerza" value="1" hidden>
-          <label id="fuerza1" class="star" name="fuerza" value="1" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="fuerzaInput2" type="radio" name="fuerza" value="2" checked="true" hidden>
-          <label id="fuerza2" class="star" name="fuerza" value="2" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="fuerzaInput3" type="radio" name="fuerza" value="3" hidden>
-          <label id="fuerza3" class="star" name="fuerza" value="3" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="fuerzaInput4" type="radio" name="fuerza" value="4" hidden>
-          <label id="fuerza4" class="star" name="fuerza" value="4" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
-          <input id="fuerzaInput5" type="radio" name="fuerza" value="5" hidden>
-          <label id="fuerza5" class="star" name="fuerza" value="5" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="fueInput1" type="radio" name="fue" value="1" hidden>
+          <label id="fue1" class="star" name="fue" value="1" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="fueInput2" type="radio" name="fue" value="2" checked="true" hidden>
+          <label id="fue2" class="star" name="fue" value="2" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="fueInput3" type="radio" name="fue" value="3" hidden>
+          <label id="fue3" class="star" name="fue" value="3" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="fueInput4" type="radio" name="fue" value="4" hidden>
+          <label id="fue4" class="star" name="fue" value="4" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
+          <input id="fueInput5" type="radio" name="fue" value="5" hidden>
+          <label id="fue5" class="star" name="fue" value="5" onclick="set_stat(this)"><i class="fa fa-star"></i></label>
         </div>
 
         <br>

@@ -1,5 +1,5 @@
 //console.log("Hola mundo");
-
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
 function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
@@ -8,7 +8,6 @@ function myFunction() {
       x.className = "topnav";
     }
 }
-
 
 function mesa_arquitecto() {
     var x = document.getElementById("architect_table");
@@ -43,22 +42,28 @@ function replaceAll(str, find, replace) {
 }
 
 
+
 function set_stat(rate){
-
-    draw = true;
+    item = rate.getAttribute("name");
     n = parseInt(rate.getAttribute("value"));
+    lista = document.getElementsByName(item);
+    draw = true;
 
-    actual = document.getElementsByClassName("star checked");
-    if (actual.length == n){
-        draw = false;
+
+    for (let b = 4; 4 >= 0; b--){
+        if (lista[b].getAttribute("class", "star checked")){
+            lista[b].removeAttribute("checked");
+            actual = b;
+            draw = false;
+            break;
+        }
     }
 
-    item = rate.getAttribute("name");
-    lista = document.getElementsByName(item);
-    lista.forEach(stat => {
-        stat.classList.remove("checked");
-        stat.removeAttribute("checked");
-    });
+    if (n == actual) {
+        alert("como??" + n + actual);
+        draw = false;
+    }
+    
 
     if (draw){
         for(let i = 1; i <= n; i++){
