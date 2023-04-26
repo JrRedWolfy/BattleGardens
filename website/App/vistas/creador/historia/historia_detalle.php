@@ -9,7 +9,7 @@
   </div>
   <div class="two evento work_card">
     <h2>Historia</h2>
-    <form action="<?php echo RUTA_URL?>/arquitecto/add_historia" method="POST" onsubmit="return true">
+    <form action="<?php echo RUTA_URL?>/arquitecto/add_historia<?php if($this->datos['historia']->id != 1): echo $this->datos['historia']->id; endif?>" method="POST" onsubmit="return true">
 
         <input type="text" name="titulo" value="<?php echo $this->datos['historia']->titulo?>" placeholder="Titulo">
 

@@ -9,16 +9,6 @@ function myFunction() {
     }
 }
 
-function mesa_arquitecto() {
-    var x = document.getElementById("architect_table");
-    if (x.className === "hide") {
-        x.classList.remove("hide");
-      x.className += "show";
-    } else {
-      x.className = "hide";
-    }
-}
-
 function read_symbl(elemen){
 
     var RUTA_URL = "http://localhost/battlegardens/website";
@@ -48,21 +38,24 @@ function set_stat(rate){
     n = parseInt(rate.getAttribute("value"));
     lista = document.getElementsByName(item);
     draw = true;
-    actual = 5;
+    actual = 0;
 
-
-    // Calcula el actual y lo desselecciona
+    
+    // Calcula el actual y lo deselecciona
     for (let b = 4; b >= 0; b--){
         if (lista[b].getAttribute("class") == "star checked"){
-            document.getElementById(item+"Input"+n).setAttribute("checked", false);
-            actual = b;
+            actual = b+1;
+            document.getElementById(item+"Input"+actual).setAttribute("checked", false);
             break;
         }
     }
 
     // Determina si hay que dibujar o borrar
-    if (n-1 == actual) {
+    if (n == actual) {
         draw = false;
+        document.getElementById(item+"Input0").setAttribute("checked", true);
+    } else {
+        document.getElementById(item+"Input0").setAttribute("checked", false);
     }
 
 
