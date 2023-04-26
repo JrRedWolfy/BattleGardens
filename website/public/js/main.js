@@ -48,23 +48,30 @@ function set_stat(rate){
     n = parseInt(rate.getAttribute("value"));
     lista = document.getElementsByName(item);
     draw = true;
+    actual = 5;
 
 
-    for (let b = 4; 4 >= 0; b--){
-        if (lista[b].getAttribute("class", "star checked")){
-            lista[b].removeAttribute("checked");
+    // Calcula el actual y lo desselecciona
+    for (let b = 4; b >= 0; b--){
+        if (lista[b].getAttribute("class") == "star checked"){
+            document.getElementById(item+"Input"+n).setAttribute("checked", false);
             actual = b;
-            draw = false;
             break;
         }
     }
 
-    if (n == actual) {
-        alert("como??" + n + actual);
+    // Determina si hay que dibujar o borrar
+    if (n-1 == actual) {
         draw = false;
     }
-    
 
+
+    // Borra las estrellas
+    lista.forEach(stat => {
+        stat.classList.remove("checked");
+    });
+    
+    // Dibuja las estrellas hasta la seleccionada y aplica el check
     if (draw){
         for(let i = 1; i <= n; i++){
             document.getElementById(item+i).classList.add("checked");
