@@ -32,16 +32,19 @@
             return $this->db->registro();   
         }
 
+        // FUNCION FINAL [[Falta adaptar imagenes]]
         public function new_artefacto($sheet, $creador){
             // Crea un artefacto
-            $this->db->query("INSERT INTO artefacto (nombre, plus_ingenio, plus_sigilo, plus_fuerza, valor, autor, fecha, progreso)
-                VALUES (:nombre, :pi, :ps, :pf, :valor, :autor, NOW(), :progreso)");
+            $this->db->query("INSERT INTO artefacto (id_rareza, img_artefacto, nombre, descripcion, plus_carisma, plus_fuerza, plus_inteligencia, plus_infortuna, autor, fecha, progreso)
+                VALUES (:rareza, 'imagen', :nombre, :descrip, :pc, :pf, :pi, :pl, :autor, NOW(), :progreso)");
 
-            $this->db->bind(':nombre',trim($sheet['nombre']));
-            $this->db->bind(':pi',trim($sheet['ingenio']));
-            $this->db->bind(':ps',trim($sheet['sigilo']) );
-            $this->db->bind(':pf',trim($sheet['fuerza']));
-            $this->db->bind(':valor',trim($sheet['valor']));
+            $this->db->bind(':rareza',trim($sheet['rareza']));
+            $this->db->bind(':nombre',trim($sheet['titulo']));
+            $this->db->bind(':descrip',trim($sheet['descripcion']));
+            $this->db->bind(':pc',trim($sheet['carInput']));
+            $this->db->bind(':pf',trim($sheet['fueInput']) );
+            $this->db->bind(':pi',trim($sheet['intInput']));
+            $this->db->bind(':pl',trim($sheet['forInput']));
             $this->db->bind(':autor', $creador);
             $this->db->bind(':progreso', "1"); // Poner el Estado En Proceso
 
@@ -52,25 +55,30 @@
             }
         }
 
+        // FUNCION FINAL [[Sin comentarios adicionales]]
         public function del_artefacto($id){
             
-            $this->db->query("DELETE FROM artefacto WHERE id_artefacto = :id");
-            
+            // Dar por cancelado un artefacto (''borrar'')
+            $this->db->query("UPDATE artefacto SET inhabilitado = 1
+            WHERE id_artefacto = :id");
+            // Poner Deshabilitado
             $this->db->bind(':id', $id);
 
             if($this->db->execute()){
-                return true; // OBSERVACION; Puede que borrar un curso no sea buena idea si eso conlleva eliminar los movimientos asociados.
+                return true;
             }else{
                 return false;
             }
         }
 
+        // FUNCION FINAL [[Fecha de Finalizacion¿?]]
         public function end_artefacto($id){
             // Dar por terminado un Artefacto
             $this->db->query("UPDATE artefacto SET id_progreso = :progreso
             WHERE id_artefacto = :id");
             // Poner en :progreso el id del estado Finalizado
             $this->db->bind(':id', $id);
+            $this->db->bind(':progreso', 3);
 
             if($this->db->execute()){
                 return true;
@@ -79,18 +87,19 @@
             }
         }
 
+        // FUNCION FINAL [[Arreglar Imagen]]
         public function edit_artefacto($sheet, $id){
             // Editar Artefacto
-            $this->db->query("UPDATE artefacto SET nombre = :nombre, plus_ingenio = :pi, plus_sigilo = :ps, plus_fuerza = :pf, valor = :valor
-            WHERE id_artefacto = :id");
+            $this->db->query("UPDATE artefacto SET nombre = :nombre, id_rareza = :rareza, img_artefacto = :imagen, descripcion = :descrip, plus_carisma = :pc, plus_fuerza = :pf, plus_inteligencia = :pi, plus_infortuna = :pl
+                            WHERE id_artefacto = :id");
 
-            $this->db->bind(':nombre',trim($sheet['nombre']));
-            $this->db->bind(':pi',trim($sheet['ingenio']));
-            $this->db->bind(':ps',trim($sheet['sigilo']) );
-            $this->db->bind(':pf',trim($sheet['fuerza']));
-            $this->db->bind(':valor',trim($sheet['valor']));
-
-            $this->db->bind(':id', $id);
+            $this->db->bind(':rareza',trim($sheet['rareza']));
+            $this->db->bind(':nombre',trim($sheet['titulo']));
+            $this->db->bind(':descrip',trim($sheet['descripcion']));
+            $this->db->bind(':pc',trim($sheet['carInput']));
+            $this->db->bind(':pf',trim($sheet['fueInput']) );
+            $this->db->bind(':pi',trim($sheet['intInput']));
+            $this->db->bind(':pl',trim($sheet['forInput']));
 
             if($this->db->execute()){
                 return true;
@@ -99,12 +108,14 @@
             }
         }
 
+        // FUNCION FINAL[[Sin comentarios adicionales]]
         public function test_artefacto($id){
             // Testear Artefacto
             $this->db->query("UPDATE artefacto SET id_progreso = :progreso
             WHERE id_artefacto = :id");
             // Poner en :progreso el id del estado En Testeo (Para realizar la consulta el Estado inicial ha de ser Finalizado)
             $this->db->bind(':id', $id);
+            $this->db->bind(':progreso', 4);
 
             if($this->db->execute()){
                 return true;
@@ -113,12 +124,14 @@
             }
         }
 
+        // FUNCION FINAL[[Sin comentarios adicionales]]
         public function activate_artefacto($id){
             // Activar Artefacto
             $this->db->query("UPDATE artefacto SET id_progreso = :progreso
             WHERE id_artefacto = :id");
             // Poner en :progreso el id del estado Activado (Para realizar la consulta el Estado inicial ha de ser Finalizado)
             $this->db->bind(':id', $id);
+            $this->db->bind(':progreso', 5);
 
             if($this->db->execute()){
                 return true;
@@ -126,6 +139,8 @@
                 return false;
             }
         }
+
+
 
         public function collect_artefacto($id, $game){
             // Obtener un artefacto en un juego (Obtenibles en aventuras y en Eventos especiales)

@@ -96,18 +96,12 @@ id_progreso int primary key auto_increment,
 nombre varchar(16) not null
 );
 
-create table obtencion(
-id_obtencion int primary key auto_increment,
-nombre varchar(30) not null,
-valor int
-);
-
 create table artefacto(
 id_artefacto int primary key auto_increment,
-id_obtencion int not null,
 id_rareza int not null,
 img_artefacto varchar(250) not null,
 nombre varchar(30) not null,
+descripcion varchar(200) not null,
 plus_carisma int not null default 0,
 plus_fuerza int not null default 0,
 plus_inteligencia int not null default 0,
@@ -119,7 +113,6 @@ inhabilitado boolean default 0,
 
 CONSTRAINT FK6 FOREIGN KEY(id_progreso)  REFERENCES progreso (id_progreso) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FKA5 FOREIGN KEY(id_rareza)  REFERENCES rareza (id_rareza) ON UPDATE CASCADE ON DELETE RESTRICT,
-CONSTRAINT FKA6 FOREIGN KEY(id_obtencion)  REFERENCES obtencion (id_obtencion) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK7 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT 
 );
 

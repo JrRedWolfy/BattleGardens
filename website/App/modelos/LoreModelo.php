@@ -8,6 +8,18 @@
 
         //Funciones de Lore
 
+        // DESUSO
+        public function get_ids($paso, $section){
+            $section = $section * $paso;
+            $paso = $section + $paso;
+
+            $this->db->query("SELECT id_historia as id FROM historia ORDER BY id_historia LIMIT $section, $paso");
+
+            return $this->db->registros();
+
+        }
+
+
         public function get_historias(){
 
             $this->db->query("SELECT h.id_historia as id, m.nombre as mundo, h.titulo, h.fecha, h.autor, p.nombre as progreso FROM historia h, mundo m, progreso p

@@ -85,7 +85,7 @@
     </form>
   </div>
   <div class="fou work_card">
-    <button class="verde">FINALIZAR</i></button>
+    <button class="verde"><a href="<?php echo RUTA_URL?>/arquitecto/finish_artefacto/<?php echo $this->datos['artefacto']->id?>">FINALIZAR</a></button>
   </div>
 </div>
     

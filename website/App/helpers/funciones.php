@@ -14,6 +14,23 @@
             return true;
         }
     }
+
+    // Desuso
+    function get_slot($taken){
+        $slot = -1;
+        if (count($taken) == 1){
+            $slot = $taken[$i]->id+1;
+        } else {
+            for ($i = 0; $i <= count($taken); $i++){
+                if($taken[$i]->id+1 != $taken[$i+1]->id){
+                    $slot = $taken[$i]->id+1;
+                    break;
+                }
+            }
+        }
+        
+        return $slot;
+    }
     
 
 ?>

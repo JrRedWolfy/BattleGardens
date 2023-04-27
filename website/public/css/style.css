@@ -375,3 +375,22 @@ textarea {
   background-color: #04AA6D;
   color: #ffffff;
 }
+
+
+
+/*COMUNIDAD*/
+
+/*Destacados*/
+
+.expositor{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card {
+  border-top: 8px solid #333;
+  border-right: 8px solid #333;
+  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}

@@ -108,12 +108,10 @@ class Arquitecto extends Controlador{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;
 
-            print_r($sheet);
-            exit();
+            $autor = $this->datos["usuarioSesion"]->nickname;
 
-
-            if($this->mundoModelo->new_mundo($sheet)){
-                redireccionar("/arquitecto/vista_evento");
+            if($this->artefactoModelo->new_artefacto($sheet, $autor)){
+                redireccionar("/arquitecto/vista_artefacto");
             } else {
                 echo "Ni se como llegue aqui";
             }
@@ -124,11 +122,27 @@ class Arquitecto extends Controlador{
                 $this->vista("/creador/artefacto/artefacto_detalle", $this->datos);
             } else {
 
-                echo "ni idea de como llegaste aqui compañero Historico";
+                $this->vista("/creador/artefacto/artefacto_detalle", $this->datos);
             }
         }
     }
 
+    public function finish_artefacto($id){
+
+        if($this->artefactoModelo->end_artefacto($id)){
+            redireccionar("/arquitecto/vista_artefacto");
+        } else {
+            echo "Ni se como llegue aqui[Fallo el UPDATE]";
+        }
+    }
+
+    public function dismiss_artefacto($id){
+        if($this->artefactoModelo->del_artefacto($id)){
+            redireccionar("/arquitecto/vista_artefacto");
+        } else {
+            echo "Ni se como llegue aqui[Fallo el UPDATE]";
+        }
+    }
 
     // EVENTOS
     public function add_evento($id = 1){
@@ -191,6 +205,8 @@ class Arquitecto extends Controlador{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;
 
+            //tomar Id
+            
             $autor = $this->datos["usuarioSesion"]->nickname;
 
             if($this->loreModelo->new_story($sheet, $autor)){
@@ -202,6 +218,8 @@ class Arquitecto extends Controlador{
         } else {
             if ($id == 1) {
                 // CREAR NUEVO
+
+                
 
                 $this->vista("/creador/historia/historia_detalle", $this->datos);
             } else {
