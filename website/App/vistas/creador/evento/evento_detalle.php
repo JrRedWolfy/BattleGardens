@@ -9,7 +9,7 @@
   </div>
   <div class="two evento work_card">
     <h2>Evento</h2>
-    <form action="">
+    <form action="<?php echo RUTA_URL?>/arquitecto/add_evento/<?php echo $this->datos['evento']->id ?>" method="POST">
 
         <input type="text" name="titulo" value="<?php echo $this->datos['evento']->titulo?>" placeholder="Titulo">
 

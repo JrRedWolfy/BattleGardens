@@ -152,12 +152,23 @@ class Arquitecto extends Controlador{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;
 
-            if($this->mundoModelo->new_mundo($sheet)){
-                redireccionar("/arquitecto/vista_evento");
+
+            if($id != 1){
+                //Editar
+                if($this->eventoModelo->mod_evento($sheet)){
+                    redireccionar("/arquitecto/vista_evento");
+                } else {
+                    echo "Ni se como llegue aqui";
+                }
             } else {
-                echo "Ni se como llegue aqui";
+                // Crear
+                if($this->eventoModelo->new_evento($sheet)){
+                    redireccionar("/arquitecto/vista_evento");
+                } else {
+                    echo "Ni se como llegue aqui";
+                }
             }
-  
+
         } else {
             if ($id == 1) {
 
