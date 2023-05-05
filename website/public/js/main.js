@@ -71,4 +71,11 @@ function set_stat(rate){
         }
         document.getElementById(item+"Input"+n).setAttribute("checked", true);
     }
+
+}
+
+// MODALES PARA ELIMINAR FUNCION AUX
+
+function place_id(id, item){
+    document.getElementById(item).value = id;
 }

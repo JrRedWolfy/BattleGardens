@@ -58,7 +58,7 @@
             }
         }
 
-        public function del_Story($id){
+        public function del_story($id){
             // Eliminar Relato
             $this->db->query("DELETE FROM historia WHERE id_historia = :id");
             
@@ -85,13 +85,14 @@
             }
         }
 
-        public function edit_Story($id){
+        public function mod_story($id, $sheet){
             // Editar Relato
-            $this->db->query("UPDATE historia SET titulo = :titulo, contenido = :contenido
+            $this->db->query("UPDATE historia SET titulo = :titulo, id_mundo = :mundo, contenido = :contenido
             WHERE id_historia = :id");
 
             $this->db->bind(':titulo',trim($sheet['titulo']));
             $this->db->bind(':contenido',trim($sheet['contenido']));
+            $this->db->bind(':mundo',trim($sheet['mundo']));
 
             $this->db->bind(':id', $id);
 
@@ -102,7 +103,7 @@
             }
         }
 
-        public function activate_Story($id){
+        public function activate_story($id){
             // Activar un Relato
             $this->db->query("UPDATE historia SET id_progreso = :progreso
             WHERE id_historia = :id");
@@ -116,7 +117,7 @@
             }
         }
 
-        public function asign_Story($relato, $id_group){
+        public function asign_story($relato, $id_group){
             // Asignar un Relato a uno o mas Extraviados (Quiza solo uno, en cuyo caso se controla desde js)
 
             // DELETE de las relacciones actuales de la historia antes de asignar las nuevas

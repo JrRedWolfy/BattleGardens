@@ -91,8 +91,6 @@ class Arquitecto extends Controlador{
 
     public function vista_usuario(){
 
-        $this->datos["tipos_usuario"] = $this->usuarioModelo->get_tipos();
-
         $this->datos["total_usuarios"] = $this->usuarioModelo->get_usuarios();
         
         $this->vista("creador/usuario/usuarios",$this->datos);
@@ -204,8 +202,8 @@ class Arquitecto extends Controlador{
     }
 
 
-    // HISTORIAS
-    public function add_historia($id = 1){
+    // HISTORIAS (CRUD BASICO)
+    public function add_historia($id = 0){
 
         $this->datos["historia"] = $this->loreModelo->get_historia($id);
 
@@ -215,22 +213,27 @@ class Arquitecto extends Controlador{
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;
-
-            //tomar Id
             
-            $autor = $this->datos["usuarioSesion"]->nickname;
-
-            if($this->loreModelo->new_story($sheet, $autor)){
-                redireccionar("/arquitecto/vista_historia");
+            if ($id != 0){
+                
+                if($this->loreModelo->mod_story($id, $sheet)){
+                    redireccionar("/arquitecto/vista_historia");
+                } else {
+                    echo "Ni se como llegue aqui";
+                }
             } else {
-                echo "Ni se como llegue aqui";
+                $autor = $this->datos["usuarioSesion"]->nickname;
+
+                if($this->loreModelo->new_story($sheet, $autor)){
+                    redireccionar("/arquitecto/vista_historia");
+                } else {
+                    echo "Ni se como llegue aqui";
+                }
             }
   
         } else {
-            if ($id == 1) {
+            if ($id == 0) {
                 // CREAR NUEVO
-
-                
 
                 $this->vista("/creador/historia/historia_detalle", $this->datos);
             } else {
@@ -238,6 +241,16 @@ class Arquitecto extends Controlador{
 
                 $this->vista("/creador/historia/historia_detalle", $this->datos);
             }
+        }
+    }
+
+    public function del_historia(){
+        $id = $_POST['id'];
+        
+        if($this->loreModelo->del_story($id)){
+            redireccionar("/arquitecto/vista_historia");
+        } else {
+            echo "Ni se como llegue aqui";
         }
     }
 
@@ -280,7 +293,7 @@ class Arquitecto extends Controlador{
     }
 
 
-    // USUARIOS
+    // USUARIOS ()
 
     public function add_usuario(){
 
@@ -294,8 +307,21 @@ class Arquitecto extends Controlador{
             }
   
         } else {
-            echo "WTF?";
+            $this->datos["tipos_usuario"] = $this->usuarioModelo->get_tipos();
+            $this->vista("/creador/usuario/usuario_detalle", $this->datos);
         }
+    }
+
+    public function ban_usuario(){
+        $id = $_POST['id'];
+
+        if($this->usuarioModelo->ban_usuario($id)){
+            redireccionar("/arquitecto/vista_usuario");
+        } else {
+            echo "Ni se como llegue aqui";
+        }
+
+
     }
 
 

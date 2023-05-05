@@ -14,30 +14,30 @@ INSERT INTO tema (tema) VALUES
 ("Cyber");
 
 INSERT INTO idioma (idioma) VALUES
-("ESP"),
-("ENG"),
-("FRN");
+("Español"),
+("Ingles"),
+("Frances");
 
 INSERT INTO letra (letra) VALUES
-("NRM"),
-("MDM"),
-("LRG");
+("Pequeña"),
+("Mediana"),
+("Grande");
 
-INSERT INTO usuario (nickname, img_perfil, email, clave, id_rol) VALUES
-("Time Anomaly", "", "", "", 5),
-("Howler", "", "RedCatter554@gmail.com", SHA2("Howler", 256), 1),
-("Kyle", "", "davidlucealafaja@gmail.com", SHA2("Kyle", 256), 2),
-("Maddox", "", "pinkfloid478@gmail.com",SHA2("Maddox", 256), 3),
-("Liam", "", "davidlucealafaja@gmail.com", SHA2("Liam", 256), 4),
-("Als", "", "davidlucealafaja@gmail.com", SHA2("Als", 256), 5);
+INSERT INTO usuario (nickname, email, clave, id_rol, fecha_creacion) VALUES
+("Time Anomaly", "", "", 5, CURDATE()),
+("Howler", "RedCatter554@gmail.com", SHA2("Howler", 256), 1, CURDATE()),
+("Kyle", "davidlucealafaja@gmail.com", SHA2("Kyle", 256), 2, CURDATE()),
+("Maddox", "pinkfloid478@gmail.com",SHA2("Maddox", 256), 3, CURDATE()),
+("Liam", "davidlucealafaja@gmail.com", SHA2("Liam", 256), 4, CURDATE()),
+("Als", "davidlucealafaja@gmail.com", SHA2("Als", 256), 5, CURDATE());
 
 /*Aplicar SHA2(password, 256)*/
 
-INSERT INTO sombrero (nombre, img_sombrero, img_equipado, descripcion, codigo) VALUES
-("Sombrero de Iniciación", "", "", "Sombrero obseequiado a todo aquel que inicie sesión para estrenar su colección de sombreros", ""),
-("Marca H.A.T.S.", "", "", "Sombrero especial obtenido por haber pertenecido o pertenecer al equipo H.A.T.S.", ""),
-("Casco de Misionero", "", "", "Sombrero entregado por terminar una partida de Battle Gardens Lite", ""),
-("Calva del Salvador", "", "", "Sombrero entregado por haber salvado a tu primer extraviado", "");
+INSERT INTO sombrero (nombre, descripcion, codigo) VALUES
+("Sombrero de Iniciación", "Sombrero obseequiado a todo aquel que inicie sesión para estrenar su colección de sombreros", ""),
+("Marca H.A.T.S.", "Sombrero especial obtenido por haber pertenecido o pertenecer al equipo H.A.T.S.", ""),
+("Casco de Misionero", "Sombrero entregado por terminar una partida de Battle Gardens Lite", ""),
+("Calva del Salvador", "Sombrero entregado por haber salvado a tu primer extraviado", "");
 
 /*INSERT INTO logro NOT NEEDED*/
 
@@ -58,12 +58,8 @@ INSERT INTO progreso (nombre) VALUES
 ("En testeo"),
 ("Activo");
 
-INSERT INTO obtencion (nombre, valor) VALUES
-("Mercado", 300),
-("Aventura", 10);
-
-INSERT INTO artefacto (id_artefacto, id_obtencion, id_rareza, img_artefacto, nombre, autor, fecha, id_progreso, inhabilitado) VALUES
-(1, 1, 1, "img", "Artefacto por Defecto", "Maddox", "2023-03-28", 3, 1);
+INSERT INTO artefacto (id_artefacto, id_rareza, nombre, autor, fecha, id_progreso, inhabilitado) VALUES
+(1, 1, "Artefacto por Defecto", "Maddox", "2023-03-28", 3, 1);
 
 /*INSERT INTO botin NOT NEEDED*/
 
@@ -73,13 +69,13 @@ INSERT INTO mundo (nombre, sobrenombre, descripcion) VALUES
 ("Miracle", "El Mundo del Valle", "Un planeta ubicado en la rama temporal 03. Su terrasfera se conforma de valles preciosos e imposibles."),
 ("RYQZ-00", "Mundo Zero", "El planeta donde reside la civilización RYQZ, descubridora de la Energía Ryoz.");
 
-INSERT INTO extraviado (id_extraviado, id_rareza, nombre, origen, titulo, img_color, img_bw, fecha, id_progreso) VALUES
-(1, 1, "Extraviado Jimmy", 1, "El Defecto", "", "", "2023-03-28", 3);
+INSERT INTO extraviado (id_extraviado, id_rareza, nombre, origen, titulo, profesion, fecha, id_progreso) VALUES
+(1, 1, "Extraviado Jimmy", 1, "El Defecto", "Estar Muerto", "2023-03-28", 3);
 
 /*INSERT INTO extraviado_detalle NOT NEEDED*/
 
 INSERT INTO historia (id_historia, id_mundo, titulo, contenido, autor, fecha, id_progreso) VALUES
-(1, 1, "Titulo por Defecto", "Escriba aquí", "Howler", "2023-07-03", 3);
+(0, 1, "Titulo por Defecto", "Escriba aquí", "Howler", "2023-07-03", 3);
 
 /*INSERT INTO lore NOT NEEDED*/
 
@@ -105,19 +101,16 @@ INSERT INTO maquina (nombre, id_estado_maquina, porcentaje) VALUES
 ("El Colector", 1, 100),
 ("La Cabina OPT", 1, 100);
 
-INSERT INTO elemento (id_elemento, nombre, imagen_elemento, imagen_bw) VALUES
-(1, "Negativo", "", ""),
-(2, "Afirmativo", "", ""),
-(3, "Ryoz", "", ""),
-(4, "Chatarra", "", ""),
-(5, "Suministros", "", ""),
-(6, "Fuerza", "", ""),
-(7, "Inteligencia", "", ""),
-(8, "Convicción", "", "");
+INSERT INTO elemento (id_elemento, nombre) VALUES
+(1, "Negativo"),
+(2, "Afirmativo"),
+(3, "Ryoz"),
+(4, "Chatarra"),
+(5, "Suministros"),
+(6, "Fuerza"),
+(7, "Inteligencia"),
+(8, "Convicción");
 
-INSERT INTO activador (id_activador, id_elemento) VALUES
-(1, 1),
-(2, 2);
 
 /*INSERT INTO relacciones NOT NEEDED*/
 
@@ -131,13 +124,10 @@ INSERT INTO tipo_evento (id_tipo_evento, nombre) VALUES
 (3, "Historia"),
 (4, "Enlace");
 
-INSERT INTO evento_detalle (id_tipo_evento, titulo, contenido, autor, fecha, id_progreso) VALUES
+INSERT INTO evento (id_tipo_evento, titulo, contenido, autor, fecha, id_progreso) VALUES
 (1, "OST-ini", "Tras escapar de la Organización de Salvaguarda Temporal...", "Howler", "2023-03-28", 3);
 
-INSERT INTO evento (id_evento, id_activador) VALUES
-(1, 2);
-
-INSERT INTO conclusion (id_conclusion, texto, id_evento, id_activador) VALUES
+INSERT INTO conclusion (id_conclusion, texto, id_evento, id_elemento) VALUES
 (1, "Escriba aquí la conclusión del evento", 1, 2);
 
 /*INSERT INTO elemento_conclusion NOT NEEDED*/

@@ -10,7 +10,8 @@
 
         public function get_usuarios(){
            
-            $this->db->query("SELECT nickname, email, clave, id_rol FROM usuario");
+            $this->db->query("SELECT nickname, email, YEAR(CURDATE())-YEAR(fecha_creacion) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(fecha_creacion,'%m-%d'), 0 , -1 ) AS antiguedad ,ultima_sesion, t.nombre AS rol 
+                            FROM usuario u, tipo_user t WHERE u.id_rol = t.id_rol AND inhabilitado = 0");
             return $this->db->registros();
 
         }
@@ -28,12 +29,13 @@
 
         public function new_usuario($sheet){
             // Crear Extraviado !!!! FALTA EL CREADOR EN LA TABLA
-            $this->db->query("INSERT INTO usuario(nickname, email, clave, id_rol) 
-                VALUES (:nick, :email, SHA2(:clave, 256), 5)");
+            $this->db->query("INSERT INTO usuario(nickname, email, clave, id_rol, fecha_creacion) 
+                VALUES (:nick, :email, SHA2(:clave, 256), :rol, CURDATE())");
 
                 $this->db->bind(':nick', $sheet['nick']);
                 $this->db->bind(':email', $sheet['email']);
                 $this->db->bind(':clave', $sheet['clave']);
+                $this->db->bind(':rol', $sheet['rol']);
             
             if ($this->db->execute()){
                 return true;
@@ -43,9 +45,9 @@
             
         }
 
-        public function del_usuario($id){
+        public function ban_usuario($id){
             // Desactivar Usuario
-            $this->db->query("UPDATE usuario SET id_estado = 2 WHERE nickname = :nick");
+            $this->db->query("UPDATE usuario SET inhabilitado = 1 WHERE nickname = :nick");
 
             $this->db->bind(':nick', $id);
 
