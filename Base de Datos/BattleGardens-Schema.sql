@@ -12,17 +12,17 @@ nombre varchar(16) not null
 
 /*PROBABLEMENTE FINAL*/
 create table tema(
-tema varchar(16) not null
+tema varchar(16) primary key
 );
 
 /*PROBABLEMENTE FINAL*/
 create table idioma(
-idioma varchar(8) not null
+idioma varchar(8) primary key
 );
 
 /*PROBABLEMENTE FINAL*/
 create table letra(
-letra varchar(8) not null
+letra varchar(8) primary key
 );
 
 /*PROBABLEMENTE FINAL*/
@@ -364,7 +364,7 @@ autor varchar(32) not null,
 fecha date not null,
 valoracion int default 0 not null,
 
-CONSTRAINT FK30 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT   
+CONSTRAINT FK3e FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT   
 );
 
 
@@ -401,8 +401,8 @@ fecha date,
 expira int default 3,
 
 primary key(nickname, id_artefacto),
-CONSTRAINT FK33 FOREIGN KEY(id_artefacto)  REFERENCES artefacto (id_artefacto) ON UPDATE CASCADE ON DELETE RESTRICT,
-CONSTRAINT FK34 FOREIGN KEY(nickname)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT   
+CONSTRAINT FK3d FOREIGN KEY(id_artefacto)  REFERENCES artefacto (id_artefacto) ON UPDATE CASCADE ON DELETE RESTRICT,
+CONSTRAINT FK3a FOREIGN KEY(nickname)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT   
 );
 
 

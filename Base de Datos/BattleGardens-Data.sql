@@ -44,12 +44,12 @@ INSERT INTO sombrero (nombre, descripcion, codigo) VALUES
 INSERT INTO juego (id_juego, nickname) VALUES
 (1, "Howler");
 
-INSERT INTO rareza (nombre, indice_rareza) VALUES
-("Comun", 1),
-("Poco Comun", 2),
-("Raro", 3),
-("Excepcional", 4),
-("Reliquia", 5);
+INSERT INTO rareza (nombre, color, valor, indice_rareza) VALUES
+("Comun", "#cccccc", 10, 1),
+("Poco Comun", "#a4dbda", 20, 2),
+("Raro", "#61e85f", 40, 4),
+("Excepcional", "#e62100", 60, 8),
+("Reliquia", "#8621ff", 100, 12);
 
 INSERT INTO progreso (nombre) VALUES
 ("Paralizado"),
@@ -58,8 +58,8 @@ INSERT INTO progreso (nombre) VALUES
 ("En testeo"),
 ("Activo");
 
-INSERT INTO artefacto (id_artefacto, id_rareza, nombre, autor, fecha, id_progreso, inhabilitado) VALUES
-(1, 1, "Artefacto por Defecto", "Maddox", "2023-03-28", 3, 1);
+INSERT INTO artefacto (id_artefacto, id_rareza, nombre, descripcion, autor, fecha, id_progreso, inhabilitado) VALUES
+(1, 1, "Artefacto por Defecto", "Este artefacto esta defectuoso", "Maddox", "2023-03-28", 3, 1);
 
 /*INSERT INTO botin NOT NEEDED*/
 
@@ -69,8 +69,8 @@ INSERT INTO mundo (nombre, sobrenombre, descripcion) VALUES
 ("Miracle", "El Mundo del Valle", "Un planeta ubicado en la rama temporal 03. Su terrasfera se conforma de valles preciosos e imposibles."),
 ("RYQZ-00", "Mundo Zero", "El planeta donde reside la civilización RYQZ, descubridora de la Energía Ryoz.");
 
-INSERT INTO extraviado (id_extraviado, id_rareza, nombre, origen, titulo, profesion, fecha, id_progreso) VALUES
-(1, 1, "Extraviado Jimmy", 1, "El Defecto", "Estar Muerto", "2023-03-28", 3);
+INSERT INTO extraviado (id_extraviado, id_rareza, nombre, origen, titulo, profesion, descripcion, fecha, id_progreso) VALUES
+(1, 1, "Extraviado Jimmy", 1, "El Defecto", "Estar Muerto", "Se murio cuando su misión aun no comenzaba", "2023-03-28", 3);
 
 /*INSERT INTO extraviado_detalle NOT NEEDED*/
 
@@ -127,8 +127,6 @@ INSERT INTO tipo_evento (id_tipo_evento, nombre) VALUES
 INSERT INTO evento (id_tipo_evento, titulo, contenido, autor, fecha, id_progreso) VALUES
 (1, "OST-ini", "Tras escapar de la Organización de Salvaguarda Temporal...", "Howler", "2023-03-28", 3);
 
-INSERT INTO conclusion (id_conclusion, texto, id_evento, id_elemento) VALUES
-(1, "Escriba aquí la conclusión del evento", 1, 2);
 
 /*INSERT INTO elemento_conclusion NOT NEEDED*/
 
