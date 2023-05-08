@@ -106,12 +106,21 @@ class Arquitecto extends Controlador{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $sheet = $_POST;
 
-            $autor = $this->datos["usuarioSesion"]->nickname;
+            if ($id != 1){
+                if($this->artefactoModelo->mod_artefacto($sheet, $id)){
+                    redireccionar("/arquitecto/vista_artefacto");
+                } else {
+                    echo "Ni se como llegue aqui";
+                }
 
-            if($this->artefactoModelo->new_artefacto($sheet, $autor)){
-                redireccionar("/arquitecto/vista_artefacto");
             } else {
-                echo "Ni se como llegue aqui";
+                $autor = $this->datos["usuarioSesion"]->nickname;
+
+                if($this->artefactoModelo->new_artefacto($sheet, $autor)){
+                    redireccionar("/arquitecto/vista_artefacto");
+                } else {
+                    echo "Ni se como llegue aqui";
+                }
             }
   
         } else {
@@ -119,6 +128,7 @@ class Arquitecto extends Controlador{
 
                 $this->vista("/creador/artefacto/artefacto_detalle", $this->datos);
             } else {
+
 
                 $this->vista("/creador/artefacto/artefacto_detalle", $this->datos);
             }
@@ -134,7 +144,8 @@ class Arquitecto extends Controlador{
         }
     }
 
-    public function dismiss_artefacto($id){
+    public function dismiss_artefacto(){
+        $id = $_POST["id"];
         if($this->artefactoModelo->del_artefacto($id)){
             redireccionar("/arquitecto/vista_artefacto");
         } else {

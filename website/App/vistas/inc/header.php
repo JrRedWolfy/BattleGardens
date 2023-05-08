@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 
+    <!-- Para que Artefactos funcione -->
+    <script src="<?php echo RUTA_URL?>/js/artifact_onload.js"></script>
     <script src="https://kit.fontawesome.com/6952d14819.js" crossorigin="anonymous"></script>
     <!--link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'-->
 </head>

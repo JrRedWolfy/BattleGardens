@@ -56,7 +56,7 @@
         </div>
 
         <br>
-        <label for="">Infortunio</label>
+        <label for="">Desventura</label>
         <div class="rating">
           <input id="forInput0" type="radio" name="forInput" value="0" checked hidden>
           <input id="forInput1" type="radio" name="forInput" value="1" hidden>
@@ -74,12 +74,16 @@
         <label for="">Rareza</label>
         <select name="rareza" id="">
         <?php foreach($this->datos["rarezas"] as $rareza):?>
+          <?php if($this->datos['artefacto']->rareza != $rareza->id):?>
           <option value="<?php echo $rareza->id?>"><?php echo $rareza->nombre?></option>
+          <?php else:?>
+            <option value="<?php echo $rareza->id?>" selected><?php echo $rareza->nombre?></option>
+          <?php endif?>
         <?php endforeach?>
         </select>
         
         <label for=""> Origen</label>
-        <textarea name="descripcion" id="" cols="50" rows="80"></textarea>
+        <textarea name="descripcion" id="" cols="50" rows="80"><?php echo $this->datos['artefacto']->descripcion?></textarea>
 
         <button type="submit" class="verde"><i class="fa fa-save"></i>Guardar</button>
     </form>
@@ -88,5 +92,9 @@
     <button class="verde"><a href="<?php echo RUTA_URL?>/arquitecto/finish_artefacto/<?php echo $this->datos['artefacto']->id?>">FINALIZAR</a></button>
   </div>
 </div>
+
+<script>
+  window.onload=init_stats(<?php echo $this->datos['artefacto']->pc.','.$this->datos['artefacto']->pf.','.$this->datos['artefacto']->pi.','.$this->datos['artefacto']->pd?>);
+</script>
     
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>

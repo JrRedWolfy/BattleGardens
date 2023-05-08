@@ -53,7 +53,7 @@ INSERT INTO rareza (nombre, color, valor, indice_rareza) VALUES
 
 INSERT INTO progreso (nombre) VALUES
 ("Paralizado"),
-("En progreso"),
+("En desarrollo"),
 ("Acabado"),
 ("En testeo"),
 ("Activo");

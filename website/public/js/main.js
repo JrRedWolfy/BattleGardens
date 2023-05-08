@@ -31,8 +31,6 @@ function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
 
-
-
 function set_stat(rate){
     item = rate.getAttribute("name");
     n = parseInt(rate.getAttribute("value"));
@@ -45,17 +43,19 @@ function set_stat(rate){
     for (let b = 4; b >= 0; b--){
         if (lista[b].getAttribute("class") == "star checked"){
             actual = b+1;
-            document.getElementById(item+"Input"+actual).setAttribute("checked", false);
+            alert("deseleccionar: " + actual);
+            document.getElementById(item+"Input"+actual).removeAttribute("checked");
             break;
         }
     }
 
     // Determina si hay que dibujar o borrar
     if (n == actual) {
+        alert("No se dibuja");
         draw = false;
         document.getElementById(item+"Input0").setAttribute("checked", true);
     } else {
-        document.getElementById(item+"Input0").setAttribute("checked", false);
+        document.getElementById(item+"Input0").removeAttribute("checked");
     }
 
 

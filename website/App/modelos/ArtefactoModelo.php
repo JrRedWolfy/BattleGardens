@@ -12,9 +12,9 @@
         public function get_artefactos(){
             // Conseguir todos los Artefactos
 
-            $this->db->query("SELECT a.id_artefacto as id, a.img as img, a.nombre as nombre, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as ps, a.autor as autor, a.fecha as fecha, p.nombre as progreso
+            $this->db->query("SELECT a.id_artefacto as id, a.img as img, a.nombre as nombre, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as pd, a.autor as autor, a.fecha as fecha, p.nombre as progreso
                 FROM artefacto a, progreso p
-                WHERE a.id_progreso = p.id_progreso
+                WHERE a.id_progreso = p.id_progreso AND a.inhabilitado != 1
                 ORDER BY a.fecha");
 
             return $this->db->registros();
@@ -22,7 +22,7 @@
 
         public function get_artefacto($id){
             // Conseguir artefacto(No Final)
-            $this->db->query("SELECT a.id_artefacto as id, a.img as img, a.nombre as nombre, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as ps, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
+            $this->db->query("SELECT a.id_artefacto as id, a.id_rareza as rareza, a.img as img, a.nombre as nombre, a.descripcion as descripcion, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as pd, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
                 FROM artefacto a, progreso p
                 WHERE a.id_progreso = p.id_progreso AND a.id_artefacto = :id
                 ORDER BY a.fecha");
@@ -35,8 +35,8 @@
         // FUNCION FINAL [[Falta adaptar imagenes]]
         public function new_artefacto($sheet, $creador){
             // Crea un artefacto
-            $this->db->query("INSERT INTO artefacto (id_rareza, img, nombre, descripcion, plus_carisma, plus_fuerza, plus_inteligencia, plus_desventura, autor, fecha, progreso)
-                VALUES (:rareza, 'imagen', :nombre, :descrip, :pc, :pf, :pi, :pl, :autor, NOW(), :progreso)");
+            $this->db->query("INSERT INTO artefacto (id_rareza, img, nombre, descripcion, plus_carisma, plus_fuerza, plus_inteligencia, plus_desventura, autor, fecha, id_progreso)
+                VALUES (:rareza, 'artefacto_default.png', :nombre, :descrip, :pc, :pf, :pi, :pd, :autor, NOW(), :progreso)");
 
             $this->db->bind(':rareza',trim($sheet['rareza']));
             $this->db->bind(':nombre',trim($sheet['titulo']));
@@ -44,9 +44,9 @@
             $this->db->bind(':pc',trim($sheet['carInput']));
             $this->db->bind(':pf',trim($sheet['fueInput']) );
             $this->db->bind(':pi',trim($sheet['intInput']));
-            $this->db->bind(':pl',trim($sheet['forInput']));
+            $this->db->bind(':pd',trim($sheet['forInput']));
             $this->db->bind(':autor', $creador);
-            $this->db->bind(':progreso', "1"); // Poner el Estado En Proceso
+            $this->db->bind(':progreso', "2"); // Poner el Estado En Desarrollo
 
             if($this->db->execute()){
                 return true;
@@ -88,9 +88,9 @@
         }
 
         // FUNCION FINAL [[Arreglar Imagen]]
-        public function edit_artefacto($sheet, $id){
+        public function mod_artefacto($sheet, $id){
             // Editar Artefacto
-            $this->db->query("UPDATE artefacto SET nombre = :nombre, id_rareza = :rareza, img = :imagen, descripcion = :descrip, plus_carisma = :pc, plus_fuerza = :pf, plus_inteligencia = :pi, plus_desventura = :pl
+            $this->db->query("UPDATE artefacto SET nombre = :nombre, id_rareza = :rareza, descripcion = :descrip, plus_carisma = :pc, plus_fuerza = :pf, plus_inteligencia = :pi, plus_desventura = :pd
                             WHERE id_artefacto = :id");
 
             $this->db->bind(':rareza',trim($sheet['rareza']));
@@ -99,7 +99,8 @@
             $this->db->bind(':pc',trim($sheet['carInput']));
             $this->db->bind(':pf',trim($sheet['fueInput']) );
             $this->db->bind(':pi',trim($sheet['intInput']));
-            $this->db->bind(':pl',trim($sheet['forInput']));
+            $this->db->bind(':pd',trim($sheet['forInput']));
+            $this->db->bind(':id', $id);
 
             if($this->db->execute()){
                 return true;
