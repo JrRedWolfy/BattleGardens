@@ -64,6 +64,9 @@ class Arquitecto extends Controlador{
     public function vista_extraviado(){
 
         $this->datos["total_extraviados"] = $this->extraviadoModelo->get_extraviados();
+        $this->datos["fil_fecha"] = $this->extraviadoModelo->get_fil_fecha();
+        $this->datos["fil_autor"] = $this->extraviadoModelo->get_fil_autor();
+        $this->datos["fil_progreso"] = $this->extraviadoModelo->get_fil_progreso();
         
         $this->vista("creador/extraviado/extraviados",$this->datos);
     }  
@@ -204,7 +207,7 @@ class Arquitecto extends Controlador{
             }
   
         } else {
-            if ($id == 0) {
+            if ($id == 1) {
                 $this->vista("/creador/extraviado/extraviado_detalle", $this->datos);
             } else {
                 echo "Aqui editamos el extraviado pertinente";

@@ -1,0 +1,82 @@
+/*CONTENEDORES DE CARDS*/
+
+.listacards {
+    padding: 0% 4% 4% 4%;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 4%;
+    row-gap: 20px;
+    
+}
+
+
+/*ESTILOS DE LAS CARDS*/
+
+.cajabase {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-direction: row;
+    height: 120px;
+    width: 260px;
+    
+}
+
+.cajalateral {
+    flex-direction: column;
+    height: 100%;
+    width: 15px;
+    border: 2px solid red;
+    background: #e62100;
+    border-radius: 10px;
+}
+
+.cajamain {
+    
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 200px;
+    border-top: 2px solid #142066;
+    border-right: 2px solid #080532;
+    border-left: 2px solid #142066;
+    border-bottom: 2px solid #080532;
+    background: #fffffa;
+    border-radius: 10px;
+    margin: 0px 5px;
+}
+
+.cajatitulo {
+    flex-direction: row;
+    height: 40px;
+    border-bottom: 1px solid #142066;
+    background: rgb(15,16,42);
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    background: #7671b6;
+}
+
+.cajainfo {
+    flex-direction: row;
+    height: 80px;
+}
+
+.cajabotones {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 35px;
+}
+
+.cajaboton {
+    background: #596c6e;
+    color: #ffffff;
+    height: 35px;
+    width: 35px;
+    margin: 2px 0px;
+    border-radius: 10px;
+}

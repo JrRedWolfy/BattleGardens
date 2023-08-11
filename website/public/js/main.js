@@ -79,3 +79,102 @@ function set_stat(rate){
 function place_id(id, item){
     document.getElementById(item).value = id;
 }
+
+// ANIMACION PARA ABRIR EL MENU ARQUITECTO
+function openArquitect(open){
+
+
+
+    let menuTimer = null;
+    let elem = document.getElementById("menu_arquitecto");
+    let btn = document.getElementById("rule_arquitecto");
+    let pos = 0;
+    clearInterval(menuTimer);
+
+    if (open == true){
+        pos = -300;
+        
+
+        menuTimer = setInterval(plusFrame, 0.1);
+        document.getElementById("open_arquitecto").setAttribute("onclick", "openArquitect(false);");
+
+    } else {
+        pos = 0;
+
+        menuTimer = setInterval(minuFrame, 0.1);
+        document.getElementById("open_arquitecto").setAttribute("onclick", "openArquitect(true);");
+    }
+
+    function minuFrame() {
+        
+        if (pos <= -300) {
+        clearInterval(menuTimer);
+        } else {
+            
+        pos = pos - 4;
+        elem.style.left = pos + "px";
+        posBtn = parseInt(pos)+300;
+        btn.style.left = posBtn + "px";
+        }
+    }
+
+    function plusFrame() {
+        if (pos >= 0) {
+        clearInterval(menuTimer);
+        } else {
+        pos = pos + 4;
+        elem.style.left = pos + "px";
+        posBtn = parseInt(pos)+300;
+        btn.style.left = posBtn + "px";
+        }
+    }
+}
+
+function openPerfil(open){
+
+
+
+    let menuTimer = null;
+    let elem = document.getElementById("menu_perfil");
+    let btn = document.getElementById("rule_perfil");
+    let pos = 0;
+    clearInterval(menuTimer);
+
+    if (open == true){
+        pos = -300;
+        
+
+        menuTimer = setInterval(plusFrame, 0.1);
+        document.getElementById("open_perfil").setAttribute("onclick", "openPerfil(false);");
+
+    } else {
+        pos = 0;
+
+        menuTimer = setInterval(minuFrame, 0.1);
+        document.getElementById("open_perfil").setAttribute("onclick", "openPerfil(true);");
+    }
+
+    function minuFrame() {
+        
+        if (pos <= -300) {
+        clearInterval(menuTimer);
+        } else {
+            
+        pos = pos - 4;
+        elem.style.right = pos + "px";
+        posBtn = parseInt(pos)+300;
+        btn.style.right = posBtn + "px";
+        }
+    }
+    
+    function plusFrame() {
+        if (pos >= 0) {
+        clearInterval(menuTimer);
+        } else {
+        pos = pos + 4;
+        elem.style.right = pos + "px";
+        posBtn = parseInt(pos)+300;
+        btn.style.right = posBtn + "px";
+        }
+    }
+}

@@ -10,24 +10,22 @@
  
        public function get_extraviados(){
             // Conseguir Extraviado(No Final)   
-            $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, a.origen as origen, a.titulo as titulo, 
-                a.carisma as carisma, a.fuerza as fuerza, a.inteligencia as inteligencia, a.infortuna as suerte, img_color as color, img_bw as bw, a.valor as valor,
-                a.fecha as fecha, p.id_progreso as progreso
-                FROM extraviado a, progreso p
-                WHERE a.id_progreso = p.id_progreso
-                ORDER BY a.id_progreso");
+            $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, icono as icon,
+                    year(a.fecha) as anio, p.nombre as progreso, a.autor as autor, a.fecha as fecha
+                FROM extraviado a, progreso p, rareza r
+                WHERE a.id_progreso = p.id_progreso AND a.id_rareza = r.id_rareza
+                ORDER BY a.id_extraviado");
 
             return $this->db->registros();
         }
 
         public function get_extraviado($id){
             // Conseguir Extraviado(No Final)
-            $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, a.origen as origen, a.titulo as titulo, 
-                a.ingenio as ingenio, a.sigilo as sigilo, a.fuerza as fuerza, img_color as color, img_bw as bw, a.valor as valor,
-                a.fecha as fecha, p.id_progreso as progreso
-                FROM extraviado a, progreso p
-                WHERE a.id_progreso = p.id_progreso, a.id_extraviado = :id
-                ORDER BY a.fecha");
+            $this->db->query("SELECT a.id_extraviado as id, a.nombre as nombre, a.origen as origen, a.titulo as titulo, a.profesion as profesion, a.descripcion as descripcion,
+                    a.carisma as carisma, a.fuerza as fuerza, a.inteligencia as inteligencia, a.desventura as desventura, img as img, icono as icon,
+                    a.fecha as fecha, p.id_progreso as progreso, r.nombre as rareza
+                FROM extraviado a, progreso p, rareza r
+                WHERE a.id_progreso = p.id_progreso AND a.id_rareza = r.id_rareza AND a.id_extraviado = :id");
 
                 $this->db->bind(':id', $id);
 
@@ -157,6 +155,31 @@
             } else {
                 return false;
             }
+        }
+
+
+        public function get_fil_fecha(){
+            $this->db->query("SELECT DISTINCT year(fecha) AS fecha 
+                FROM extraviado 
+                ORDER BY year(fecha)");
+
+            return $this->db->registros();
+        }
+
+        public function get_fil_autor(){
+            $this->db->query("SELECT DISTINCT autor 
+                FROM extraviado
+                ORDER BY autor");
+
+            return $this->db->registros();
+        }
+
+        public function get_fil_progreso(){
+            $this->db->query("SELECT DISTINCT p.id_progreso AS id, p.nombre 
+                FROM progreso p, extraviado e 
+                WHERE p.id_progreso = e.id_progreso");
+
+            return $this->db->registros();
         }
 
 

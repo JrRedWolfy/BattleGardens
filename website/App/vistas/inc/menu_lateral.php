@@ -31,7 +31,6 @@
   <?php endif ?>
   <?php if (tiene_permiso($datos["usuarioSesion"]->id_rol, [1, 2])): ?>
   <a href="<?php echo RUTA_URL?>/arquitecto/vista_historia" class="nav__item">Historias</a>
-  <a href="<?php echo RUTA_URL?>/arquitecto/vista_mundo" class="nav__item">Mundos</a>
   <?php endif ?>
 </nav>
 

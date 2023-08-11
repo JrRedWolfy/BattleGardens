@@ -51,15 +51,15 @@ INSERT INTO rareza (nombre, color, valor, indice_rareza) VALUES
 ("Excepcional", "#e62100", 60, 8),
 ("Reliquia", "#8621ff", 100, 12);
 
-INSERT INTO progreso (nombre) VALUES
-("Paralizado"),
-("En desarrollo"),
-("Acabado"),
-("En testeo"),
-("Activo");
+INSERT INTO progreso (nombre, color) VALUES
+("Paralizado","#ff8a8a"),
+("En desarrollo","#8afffd"),
+("Acabado","#90ff8a"),
+("En testeo","#fff18a"),
+("Activo","#e0e0e0");
 
 INSERT INTO artefacto (id_artefacto, id_rareza, nombre, descripcion, autor, fecha, id_progreso, inhabilitado) VALUES
-(1, 1, "Artefacto por Defecto", "Este artefacto esta defectuoso", "Maddox", "2023-03-28", 3, 1);
+(1, 1, "Artefacto por Defecto", "Este artefacto esta defectuoso", "Howler", "2023-03-28", 3, 1);
 
 /*INSERT INTO botin NOT NEEDED*/
 
@@ -69,8 +69,16 @@ INSERT INTO mundo (nombre, sobrenombre, descripcion) VALUES
 ("Miracle", "El Mundo del Valle", "Un planeta ubicado en la rama temporal 03. Su terrasfera se conforma de valles preciosos e imposibles."),
 ("RYQZ-00", "Mundo Zero", "El planeta donde reside la civilización RYQZ, descubridora de la Energía Ryoz.");
 
-INSERT INTO extraviado (id_extraviado, id_rareza, nombre, origen, titulo, profesion, descripcion, fecha, id_progreso) VALUES
-(1, 1, "Extraviado Jimmy", 1, "El Defecto", "Estar Muerto", "Se murio cuando su misión aun no comenzaba", "2023-03-28", 3);
+INSERT INTO extraviado (id_extraviado, id_rareza, nombre, origen, titulo, profesion, descripcion, autor, fecha, id_progreso) VALUES
+(1, 1, "Extraviado Jimmy", 1, "El Defecto", "Estar Muerto", "Se murio cuando su misión aun no comenzaba", "Howler", "2023-03-28", 3),
+(2, 1, "Howler", 4, "El Fugitivo", "Cientifico", "Howler ha sido incriminado por el delito de perturbar el equilibrio temporal", "Howler", "2023-03-28", 3),
+(3, 2, "Irjoh", 2, "El General Retirado", "Militar", "Un general perro que decidio retirarse tras perder a su hijo", "Maddox", "2024-03-28", 2),
+(4, 1, "Daniel", 1, "El Caballero del Jardin", "Ninguna", "Un niño que sueña con ser un caballero de la mesa redonda", "Maddox", "2024-03-28", 2),
+(5, 2, "Nizze", 2, "El Gato de Gerrillas", "Militar", "Se murio cuando su misión aun no comenzaba", "Howler", "2022-03-28", 5),
+(6, 2, "Liza", 3, "La Gata Maldita", "Ninguna", "Una gata negra que fue maldita con la inmortalidad y la mala suerte", "Maddox", "2022-03-28", 1),
+(7, 3, "Jack", 2, "El Cazarecompensas", "Peleador", "Un Cazarecompensas cuya unica misión en vida es acabar con su objetivo, sea quien sea", "Howler", "2025-03-28", 1),
+(8, 3, "Tiger", 4, "El Boxeador", "Peleador", "Una leyenda del boxeo que no abandonara el ring hasta ser derrotado limpiamente", "Maddox", "2025-03-28", 3),
+(9, 4, "Sir Death", 3, "El Espectro", "Ninguna", "Un fantasma que vaga sin rumbo haciendo peligrar la vida de quienes se encuentra", "Howler", "2022-03-28", 5);
 
 /*INSERT INTO extraviado_detalle NOT NEEDED*/
 

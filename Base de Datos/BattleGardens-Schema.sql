@@ -105,7 +105,8 @@ valor int not null
 /*PROBABLEMENTE FINAL*/
 create table progreso(
 id_progreso int primary key auto_increment,
-nombre varchar(16) not null
+nombre varchar(16) not null,
+color varchar(8) not null
 );
 
 /*PROBABLEMENTE FINAL(añadir default img)*/
@@ -113,6 +114,7 @@ create table artefacto(
 id_artefacto int primary key auto_increment,
 id_rareza int not null,
 img varchar(256) default 'artefacto_default.png' not null,
+icono varchar(256) default 'artefacto_icono_default.png' not null,
 nombre varchar(32) not null,
 descripcion varchar(512) not null,
 plus_carisma int not null default 0,
@@ -161,11 +163,13 @@ carisma int not null default 0,
 fuerza int not null default 0,
 inteligencia int not null default 0,
 desventura int not null default 0,
+autor varchar(32) not null,
 img varchar(256) default 'extraviado_default.png' not null,
 icono varchar(256) default 'icono_default.png' not null,
 fecha date not null,
 id_progreso int not null default 2,
 
+CONSTRAINT FKb7 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FKB5 FOREIGN KEY(id_rareza)  REFERENCES rareza (id_rareza) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK10 FOREIGN KEY(origen)  REFERENCES mundo (id_mundo) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FK11 FOREIGN KEY(id_progreso)  REFERENCES progreso (id_progreso) ON UPDATE CASCADE ON DELETE RESTRICT

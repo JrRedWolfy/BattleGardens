@@ -1,0 +1,78 @@
+
+
+#leyend_panel {
+    background-color: #596c6e;
+}
+
+#filter_panel {
+    background-color: #8da2a3;
+    padding: 0px 30px 0px 30px;
+}
+
+#filter_controller {
+    padding-bottom: 25px;
+    background-color: #b1d3d5;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    align-self: center;
+}
+
+#contenido_panel {
+    background-color: #b1d3d5;
+    align-self: center;
+
+}
+
+#page_panel {
+    background-color: #b1d3d5;
+    align-self: center;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.boton_pag {
+    margin: 0px 4px 8px 4px;
+    padding: 5px 10px 5px 10px;
+    align-content: center;
+    border-radius: 6px;
+    border: 1px solid #ffffff;
+    background-color: #8da2a3;
+    font-weight: bold;
+}
+
+.outrange {
+    display: none;
+}
+
+.active_page {
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: #7671b6;
+    border: 1px solid #142066 !important;
+}
+
+#buscador {
+    margin: 20px 0px 20px 0px;
+}
+
+.filter_button {
+    border: 1px solid #596c6e;
+    border-radius: 15px;
+    padding: 4px 12px 4px 12px;
+}
+
+.autor_border {
+    border: 1px solid #d97038;
+    background-color: #f2c8b1;
+}
+
+.fecha_border {
+    border: 1px solid #63adbf;
+    background-color: #bbe5f0;
+}
+
+.progreso_border {
+    border: 1px solid #b563bf;
+    background-color: #eabdf0;
+}
