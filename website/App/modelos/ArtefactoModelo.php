@@ -12,7 +12,7 @@
         public function get_artefactos(){
             // Conseguir todos los Artefactos
 
-            $this->db->query("SELECT a.id_artefacto as id, a.img as img, a.nombre as nombre, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as pd, a.autor as autor, a.fecha as fecha, p.nombre as progreso
+            $this->db->query("SELECT a.id_artefacto as id, a.nombre as nombre, a.autor as autor, year(a.fecha) as anio, p.nombre as progreso, p.color, a.fecha as fecha, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as pd
                 FROM artefacto a, progreso p
                 WHERE a.id_progreso = p.id_progreso AND a.inhabilitado != 1
                 ORDER BY a.fecha");
@@ -22,29 +22,31 @@
 
         public function get_artefacto($id){
             // Conseguir artefacto(No Final)
-            $this->db->query("SELECT a.id_artefacto as id, a.id_rareza as rareza, a.img as img, a.nombre as nombre, a.descripcion as descripcion, a.plus_carisma as pc, a.plus_fuerza as pf, a.plus_inteligencia as pi, plus_desventura as pd, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso
-                FROM artefacto a, progreso p
-                WHERE a.id_progreso = p.id_progreso AND a.id_artefacto = :id
-                ORDER BY a.fecha");
+            $this->db->query("SELECT a.id_artefacto as id, a.id_rareza as rareza, a.icono as icon, a.nombre as nombre, a.descripcion as descripcion, a.plus_carisma as carisma, a.plus_fuerza as fuerza, a.plus_inteligencia as inteligencia, plus_desventura as desventura, a.autor as autor, a.fecha as fecha, p.id_progreso as progreso, r.color
+                FROM artefacto a, progreso p, rareza r
+                WHERE a.id_progreso = p.id_progreso AND a.id_artefacto = :id AND r.id_rareza = a.id_rareza");
 
                 $this->db->bind(":id", $id);
 
             return $this->db->registro();   
         }
 
-        // FUNCION FINAL [[Falta adaptar imagenes]]
-        public function new_artefacto($sheet, $creador){
-            // Crea un artefacto
-            $this->db->query("INSERT INTO artefacto (id_rareza, img, nombre, descripcion, plus_carisma, plus_fuerza, plus_inteligencia, plus_desventura, autor, fecha, id_progreso)
-                VALUES (:rareza, 'artefacto_default.png', :nombre, :descrip, :pc, :pf, :pi, :pd, :autor, NOW(), :progreso)");
+        // FUNCION FINAL
+        public function new_artefacto($sheet){
 
-            $this->db->bind(':rareza',trim($sheet['rareza']));
-            $this->db->bind(':nombre',trim($sheet['titulo']));
+            $creador = $_SESSION["usuarioSesion"]->nickname;
+            // Crea un artefacto
+            $this->db->query("INSERT INTO artefacto (id_rareza, nombre, descripcion, plus_carisma, plus_fuerza, plus_inteligencia, plus_desventura, autor, fecha, id_progreso, icono)
+                VALUES (:rareza, :nombre, :descrip, :pc, :pf, :pi, :pd, :autor, NOW(), :progreso, :icono)");
+
+            $this->db->bind(':rareza',trim($sheet['rareza_select']));
+            $this->db->bind(':nombre',trim($sheet['nombre']));
             $this->db->bind(':descrip',trim($sheet['descripcion']));
             $this->db->bind(':pc',trim($sheet['carInput']));
             $this->db->bind(':pf',trim($sheet['fueInput']) );
             $this->db->bind(':pi',trim($sheet['intInput']));
             $this->db->bind(':pd',trim($sheet['forInput']));
+            $this->db->bind(':icono',trim($sheet['imagen']));
             $this->db->bind(':autor', $creador);
             $this->db->bind(':progreso', "2"); // Poner el Estado En Desarrollo
 
@@ -90,12 +92,14 @@
         // FUNCION FINAL [[Arreglar Imagen]]
         public function mod_artefacto($sheet, $id){
             // Editar Artefacto
-            $this->db->query("UPDATE artefacto SET nombre = :nombre, id_rareza = :rareza, descripcion = :descrip, plus_carisma = :pc, plus_fuerza = :pf, plus_inteligencia = :pi, plus_desventura = :pd
+
+            $this->db->query("UPDATE artefacto SET nombre = :nombre, id_rareza = :rareza, icono = :img, descripcion = :descrip, plus_carisma = :pc, plus_fuerza = :pf, plus_inteligencia = :pi, plus_desventura = :pd
                             WHERE id_artefacto = :id");
 
-            $this->db->bind(':rareza',trim($sheet['rareza']));
-            $this->db->bind(':nombre',trim($sheet['titulo']));
+            $this->db->bind(':rareza',trim($sheet['rareza_select']));
+            $this->db->bind(':nombre',trim($sheet['nombre']));
             $this->db->bind(':descrip',trim($sheet['descripcion']));
+            $this->db->bind(':img',trim($sheet['imagen']));
             $this->db->bind(':pc',trim($sheet['carInput']));
             $this->db->bind(':pf',trim($sheet['fueInput']) );
             $this->db->bind(':pi',trim($sheet['intInput']));
@@ -161,7 +165,7 @@
         // DEVOLVER  RAREZAS
         public  function get_rarezas(){
 
-            $this->db->query("SELECT id_rareza as id, nombre FROM rareza");
+            $this->db->query("SELECT id_rareza as id, nombre, color FROM rareza");
 
             return $this->db->registros();
         }
@@ -183,6 +187,29 @@
             }
         }
         
+        public function get_fil_fecha(){
+            $this->db->query("SELECT DISTINCT year(fecha) AS fecha 
+                FROM artefacto 
+                ORDER BY year(fecha)");
+
+            return $this->db->registros();
+        }
+
+        public function get_fil_autor(){
+            $this->db->query("SELECT DISTINCT autor 
+                FROM artefacto
+                ORDER BY autor");
+
+            return $this->db->registros();
+        }
+
+        public function get_fil_progreso(){
+            $this->db->query("SELECT DISTINCT p.id_progreso AS id, p.nombre 
+                FROM progreso p, artefacto a 
+                WHERE p.id_progreso = a.id_progreso");
+
+            return $this->db->registros();
+        }
 
 
     }

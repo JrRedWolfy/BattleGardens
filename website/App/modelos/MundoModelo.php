@@ -18,7 +18,7 @@
 
         public function get_mundos_short(){
             // Añadir la imagen cuando la haya.
-            $this->db->query("SELECT id_mundo as id, nombre FROM mundo");
+            $this->db->query("SELECT id_mundo as id, nombre, img FROM mundo");
 
             return $this->db->registros();
         }

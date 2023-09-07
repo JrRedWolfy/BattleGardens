@@ -20,7 +20,7 @@
     justify-content: right;
     align-items: center;
     flex-direction: row;
-    height: 120px;
+    height: auto;
     width: 260px;
     
 }
@@ -29,8 +29,6 @@
     flex-direction: column;
     height: 100%;
     width: 15px;
-    border: 2px solid red;
-    background: #e62100;
     border-radius: 10px;
 }
 
@@ -40,11 +38,6 @@
     flex-direction: column;
     height: 100%;
     width: 200px;
-    border-top: 2px solid #142066;
-    border-right: 2px solid #080532;
-    border-left: 2px solid #142066;
-    border-bottom: 2px solid #080532;
-    background: #fffffa;
     border-radius: 10px;
     margin: 0px 5px;
 }
@@ -52,11 +45,8 @@
 .cajatitulo {
     flex-direction: row;
     height: 40px;
-    border-bottom: 1px solid #142066;
-    background: rgb(15,16,42);
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
-    background: #7671b6;
 }
 
 .cajainfo {
@@ -73,10 +63,58 @@
 }
 
 .cajaboton {
-    background: #596c6e;
-    color: #ffffff;
     height: 35px;
     width: 35px;
     margin: 2px 0px;
+    padding: 0px;
     border-radius: 10px;
+}
+
+.cajaboton a{
+    display: block;
+    padding-top: 4px;
+    align-content: center;
+    color: #ffffff;
+    height: 100%;
+    width: 100%;
+}
+
+.cajaboton a:hover {
+    color: #000000;
+}
+
+.cajaboton:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+@media only screen and (max-width: 500px) {
+    .cajabase {
+        width: 100%;
+    }
+
+    .cajainfo {
+        height: fit-content;
+    }
+
+    .cajamain {
+        width: 90%;
+        height: max-content;
+    }
+
+    .cajabotones {
+        width: 26px;
+    }
+
+    .cajaboton {
+        height: 26px;
+        width: 26px;
+        border-radius: 6px;
+        font-size: small;
+    }
+
+    .cajaboton a{
+        padding-top: 2px;
+    }
+    
 }

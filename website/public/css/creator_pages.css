@@ -1,33 +1,32 @@
 
 
-#leyend_panel {
-    background-color: #596c6e;
-}
-
 #filter_panel {
-    background-color: #8da2a3;
     padding: 0px 30px 0px 30px;
+    min-height: 100vh;
+    max-height:fit-content;
 }
 
 #filter_controller {
     padding-bottom: 25px;
-    background-color: #b1d3d5;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     align-self: center;
 }
 
 #contenido_panel {
-    background-color: #b1d3d5;
     align-self: center;
+    height: auto;
 
 }
 
 #page_panel {
-    background-color: #b1d3d5;
     align-self: center;
     text-align: center;
+    padding-bottom: 30px;
     margin-bottom: 40px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    overflow: auto;
 
 }
 
@@ -36,20 +35,17 @@
     padding: 5px 10px 5px 10px;
     align-content: center;
     border-radius: 6px;
-    border: 1px solid #ffffff;
-    background-color: #8da2a3;
     font-weight: bold;
 }
 
 .outrange {
-    display: none;
+    pointer-events: none;
+    background-color: #bbe5f0 !important;
 }
 
 .active_page {
     cursor: not-allowed;
     pointer-events: none;
-    background-color: #7671b6;
-    border: 1px solid #142066 !important;
 }
 
 #buscador {
@@ -57,22 +53,6 @@
 }
 
 .filter_button {
-    border: 1px solid #596c6e;
     border-radius: 15px;
     padding: 4px 12px 4px 12px;
-}
-
-.autor_border {
-    border: 1px solid #d97038;
-    background-color: #f2c8b1;
-}
-
-.fecha_border {
-    border: 1px solid #63adbf;
-    background-color: #bbe5f0;
-}
-
-.progreso_border {
-    border: 1px solid #b563bf;
-    background-color: #eabdf0;
 }

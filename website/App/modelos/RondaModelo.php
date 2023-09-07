@@ -6,6 +6,8 @@
             $this->db = new Base;
         }
 
+        // ACTUALMENTE NO SE UTILIZA PARA LAS FUNCIONES IMPLEMENTADAS EN LA WEB
+
         //Funciones de Ronda
 
 

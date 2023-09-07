@@ -21,7 +21,7 @@
 
             }else{
                 session_destroy();
-                redireccionar('/login');
+                //redireccionar('/login');
             }
         }
 

@@ -136,6 +136,78 @@
             return $this->db->registros();
         }
 
+        public function set_color($color){
+
+            $id = $_SESSION['usuarioSesion']->nickname;
+
+            $this->db->query("UPDATE usuario SET color = :color
+            WHERE nickname = :nick");
+
+            $this->db->bind(':color', $color);
+            $this->db->bind(':nick', $id);
+
+            $this->db->execute();
+
+        }
+
+        public function set_size($size){
+
+            $id = $_SESSION['usuarioSesion']->nickname;
+
+            $this->db->query("UPDATE usuario SET letra = :size
+            WHERE nickname = :nick");
+
+            $this->db->bind(':size', $size);
+            $this->db->bind(':nick', $id);
+
+            $this->db->execute();
+        }
+
+        public function get_color(){
+
+            $id = $_SESSION['usuarioSesion']->nickname;
+
+            // Tomamos valores de accesibilidad Actuales
+            $this->db->query("SELECT color FROM usuario
+            WHERE nickname = :nick");
+
+            $this->db->bind(':nick', $id);
+
+            return $this->db->registro();
+        }
+
+        public function get_size(){
+
+            $id = $_SESSION['usuarioSesion']->nickname;
+
+            // Tomamos valores de accesibilidad Actuales
+            $this->db->query("SELECT letra FROM usuario
+            WHERE nickname = :nick");
+
+            $this->db->bind(':nick', $id);
+
+            return $this->db->registro();
+        }
+
+        public function get_preferencias(){
+            $id = $_SESSION['usuarioSesion']->nickname;
+
+            // Tomamos valores de accesibilidad Actuales
+            $this->db->query("SELECT color, letra FROM usuario
+            WHERE nickname = :nick");
+
+            $this->db->bind(':nick', $id);
+
+            return $this->db->registro();
+        }
+
+        public function get_progresos(){
+
+            // Tomamos valores de la tabla progreso
+            $this->db->query("SELECT id_progreso as id, nombre, color, texto FROM progreso");
+
+            return $this->db->registros();
+        }
 
     }
 

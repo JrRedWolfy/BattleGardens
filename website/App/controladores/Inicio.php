@@ -8,6 +8,12 @@ class Inicio extends Controlador{
         Sesion::iniciarSesion($this->datos);
 
         $this->datos["menuActivo"] = "home";
+        
+
+        $this->usuarioModelo = $this->modelo('UsuarioModelo');
+        if(isset($this->datos['usuarioSesion'])){
+            $this->datos["accesibilidad"] = $this->usuarioModelo->get_preferencias();
+        }
 
         //$this->asesoriaModelo = $this->modelo('AsesoriaModelo');
 

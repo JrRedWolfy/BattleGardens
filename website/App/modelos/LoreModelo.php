@@ -8,29 +8,19 @@
 
         //Funciones de Lore
 
-        // DESUSO
-        public function get_ids($paso, $section){
-            $section = $section * $paso;
-            $paso = $section + $paso;
-
-            $this->db->query("SELECT id_historia as id FROM historia ORDER BY id_historia LIMIT $section, $paso");
-
-            return $this->db->registros();
-
-        }
-
 
         public function get_historias(){
 
-            $this->db->query("SELECT h.id_historia as id, m.nombre as mundo, h.titulo, h.fecha, h.autor, p.nombre as progreso FROM historia h, mundo m, progreso p
-                            WHERE h.id_mundo = m.id_mundo AND h.id_progreso = p.id_progreso");
+            $this->db->query("SELECT h.id_historia as id, h.titulo, h.autor, year(h.fecha) as anio, p.nombre as progreso, p.color, h.fecha, m.nombre as mundo
+                            FROM historia h, mundo m, progreso p
+                            WHERE h.id_mundo = m.id_mundo AND h.id_progreso = p.id_progreso AND h.id_historia != 1");
 
             return $this->db->registros();
         }
 
         public function get_historia($id){
 
-            $this->db->query("SELECT h.id_historia as id, m.nombre as mundo, h.titulo, h.contenido, h.fecha, h.autor, p.nombre as progreso 
+            $this->db->query("SELECT h.id_historia as id, m.nombre as mundo, m.img as world_img, h.titulo, h.contenido, h.fecha, h.autor, p.nombre as progreso 
                             FROM historia h, mundo m, progreso p
                             WHERE h.id_mundo = m.id_mundo AND h.id_progreso = p.id_progreso AND h.id_historia = :id");
 
@@ -40,12 +30,15 @@
         }
 
 
-        public function new_story($sheet, $creador){
+        public function new_story($sheet){ // FUNCIONAL (Sin cambios esperados)
             // Crear Relato
+
+            $creador = $_SESSION["usuarioSesion"]->nickname;
+
             $this->db->query("INSERT INTO historia (id_mundo, titulo, contenido, autor, fecha, id_progreso)
                 VALUES (:mundo, :titulo, :contenido, :autor, NOW(), :progreso)");
 
-            $this->db->bind(':mundo',trim($sheet['mundo']));
+            $this->db->bind(':mundo',trim($sheet['mundo_select']));
             $this->db->bind(':titulo',trim($sheet['titulo']));
             $this->db->bind(':contenido',trim($sheet['contenido']));
             $this->db->bind(':autor', $creador);
@@ -85,14 +78,14 @@
             }
         }
 
-        public function mod_story($id, $sheet){
+        public function mod_story($id, $sheet){  // FUNCIONAL (Sin cambios esperados)
             // Editar Relato
             $this->db->query("UPDATE historia SET titulo = :titulo, id_mundo = :mundo, contenido = :contenido
             WHERE id_historia = :id");
 
             $this->db->bind(':titulo',trim($sheet['titulo']));
             $this->db->bind(':contenido',trim($sheet['contenido']));
-            $this->db->bind(':mundo',trim($sheet['mundo']));
+            $this->db->bind(':mundo',trim($sheet['mundo_select']));
 
             $this->db->bind(':id', $id);
 
@@ -117,42 +110,93 @@
             }
         }
 
-        public function asign_story($relato, $id_group){
-            // Asignar un Relato a uno o mas Extraviados (Quiza solo uno, en cuyo caso se controla desde js)
+        public function add_relaccion($id, $historia){
+            // Asignar una historia a un Extraviado
 
-            // DELETE de las relacciones actuales de la historia antes de asignar las nuevas
-
-            $continar = true;
-            foreach($id_group as $id){
-                $this->db->query("INSERT INTO lore (id_historia, id_extraviado)
+            $this->db->query("INSERT INTO lore (id_historia, id_extraviado)
                 VALUES (:id, :extraviado)");
 
-                $this->db->bind(':id', $relato);
-                $this->db->bind(':extraviado', $id); // Poner el Estado En Proceso
-
-                if($this->db->execute()){
-                    $continuar = true;
-                }else{
-                    $continuar = false;
-                    break;
-                }
-            }
-            if($continar){
+                $this->db->bind(':id', $historia);
+                $this->db->bind(':extraviado', $id); 
+             
+            if($this->db->execute()){
                 return true;
             } else {
                 return false;
             }
         }
 
-        public function get_implicados($id){
+        public function del_relaccion($id, $historia){
+            // Desasignar de una historia a un Extraviado
 
-            $this->db->query("SELECT e.nombre as extraviado, e.titulo as apodo
-                            FROM historia h, lore l, extraviado e
-                            WHERE h.id_historia = l.id_historia AND l.id_extraviado = e.id_extraviado AND h.id_historia = :id");
+            $this->db->query("DELETE FROM lore WHERE id_extraviado = :id AND id_historia = :historia");
 
-                $this->db->bind(":id", $id);
+            $this->db->bind(':id', $id);
+            $this->db->bind(':historia', $historia); 
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function get_desvinculados($historia){
+            // Obtener los Extraviados con los que no esta relaccionado
+
+            $this->db->query("SELECT DISTINCT e.id_extraviado, concat(e.nombre,', ',e.titulo) as nombre, e.icono as extraviado, m.img as mundo 
+                FROM extraviado e, mundo m 
+                WHERE e.origen = m.id_mundo AND e.id_extraviado != 1 AND e.id_extraviado != :id AND e.id_extraviado 
+                NOT IN(SELECT l.id_extraviado FROM lore l WHERE l.id_historia=:id) 
+                ORDER BY m.img, e.nombre");
+
+                $this->db->bind(':id', $historia);
 
             return $this->db->registros();
+            
+        }
+        
+        public function get_vinculados($historia){
+            // Obtener los Extraviados con los que no esta relaccionado
+
+            $this->db->query("SELECT DISTINCT e.id_extraviado, concat(e.nombre,', ',e.titulo) as nombre, e.icono as extraviado, m.img as mundo 
+                FROM extraviado e, mundo m 
+                WHERE e.origen = m.id_mundo AND e.id_extraviado != 1 AND e.id_extraviado != :id AND e.id_extraviado 
+                IN(SELECT l.id_extraviado FROM lore l WHERE l.id_historia=:id) 
+                ORDER BY m.img, e.nombre");
+
+                $this->db->bind(':id', $historia);
+
+            return $this->db->registros();
+            
+        }
+
+        public function get_expositor(){
+            $this->db->query("SELECT id_historia as id, titulo 
+                            FROM historia 
+                            WHERE id_progreso = 5 
+                            ORDER BY fecha DESC LIMIT 3");
+
+            return $this->db->registros();
+        }
+
+        public function get_last_story(){
+            $this->db->query("SELECT id_historia as id, titulo, contenido, autor 
+                            FROM historia 
+                            WHERE id_progreso = 5 
+                            ORDER BY fecha DESC LIMIT 1");
+
+            return $this->db->registro();
+        }
+
+        public function get_pick_story($id){
+            $this->db->query("SELECT id_historia as id, titulo, contenido, autor 
+                            FROM historia 
+                            WHERE id_historia = :id");
+
+                $this->db->bind(':id', $id);
+
+            return $this->db->registro();
         }
 
         public function world_history(){
@@ -161,6 +205,30 @@
 
         public function show_timeline(){
             // Mostrar una linea del tiempo con los Relatos de X mundo?? (No Final)
+        }
+
+        public function get_fil_fecha(){
+            $this->db->query("SELECT DISTINCT year(fecha) AS fecha 
+                FROM historia 
+                ORDER BY year(fecha)");
+
+            return $this->db->registros();
+        }
+
+        public function get_fil_autor(){
+            $this->db->query("SELECT DISTINCT autor 
+                FROM historia
+                ORDER BY autor");
+
+            return $this->db->registros();
+        }
+
+        public function get_fil_progreso(){
+            $this->db->query("SELECT DISTINCT p.id_progreso AS id, p.nombre 
+                FROM progreso p, historia e 
+                WHERE p.id_progreso = e.id_progreso");
+
+            return $this->db->registros();
         }
 
 

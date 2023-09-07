@@ -1,0 +1,247 @@
+.monocroma #open_perfil {
+    background-color: #080808;
+    border-left: 2px solid #f8f8f8;
+}
+
+.monocroma #open_arquitecto {
+    background-color: #080808;
+    border-right: 2px solid #f8f8f8;
+}
+
+.monocroma .fv-arq{
+    border-right: 2px solid #f8f8f8;
+    border-bottom: 2px solid #f8f8f8;;
+}
+
+.monocroma .fv-per{
+    border-left: 2px solid #f8f8f8;
+    border-bottom: 2px solid #f8f8f8;;
+}
+
+.monocroma .creator_nav {
+    background-color: #222222;
+    border-bottom: 2px solid #f8f8f8;
+    color: #ffffff;
+}
+
+.monocroma .nav_container {
+    border-left:  1px solid #080808;
+    border-right:  1px solid #080808;
+}
+
+.monocroma .nav_item {
+    border-left:  1px solid #080808;
+    border-right:  1px solid #080808;
+    color: #ffffff;
+}
+
+.monocroma .menu_flotante {
+    background-color: #080808;
+    color: #ffffff;
+}
+
+.monocroma .head_arquitecto {
+    border-bottom: 2px solid #f8f8f8;
+}
+
+.monocroma .content_arquitecto {
+    border-left: 1px solid #485152;
+    border-right: 1px solid #485152;
+    background-color: #b1d3d5;
+}
+
+.monocroma .categoria_arq {
+    border-top: 2px solid #485152;
+    border-right: 2px solid #1f2a2b;
+    border-left: 2px solid #485152;
+    border-bottom: 2px solid #1f2a2b;
+    color: #ffffff;
+    background-color: #3f3f3f;
+}
+
+.monocroma .categoria_arq:hover {
+    border-top: 2px solid #1f2a2b;
+    border-right: 2px solid #485152;
+    border-left: 2px solid #1f2a2b;
+    border-bottom: 2px solid #485152;
+    color: #ffffff;
+}
+
+.monocroma .footer_mf {
+    border: 2px solid #f8f8f8;
+}
+
+.monocroma .lista_arquitecto li a {
+    color: #ffffff;
+}
+
+.monocroma .open-f {
+    background-color: #080808;
+}
+
+.monocroma .work_card h2 {
+    border: 2px solid #f8f8f8;
+    background-color: #222222;
+    color: #000000;
+}
+
+.monocroma .work_card {
+    background-color: #c5c5c5;
+    border: 2px solid #ffffff;
+}
+
+.monocroma .fullscreen {
+    background-color: #3f3f3f;
+}
+
+.monocroma .mh-c {
+    background-color: #222222;
+    border: 2px solid #f8f8f8;
+}
+  
+.monocroma .mb-c {
+    background-color: #3f3f3f;
+    border-right: 2px solid #1f2a2b;
+    border-left: 2px solid #1f2a2b;
+    border-bottom: 2px solid #1f2a2b;
+}
+  
+.monocroma .mb-cn {
+    border-left: 1px solid #485152;
+    border-right: 1px solid #485152;
+    background-color: #f0f0f0;
+}
+
+.monocroma .unk-cardlist {
+    background-color: #b1d3d5;
+    border: 1px solid #749192;
+}
+
+.monocroma .unk-box {
+    border-top: 2px solid #485152;
+    border-right: 2px solid #1f2a2b;
+    border-left: 2px solid #485152;
+    border-bottom: 2px solid #1f2a2b;
+    background-color: #ffffff;
+}
+
+.monocroma .world-show img {
+    border: 2px solid #1f2a2b;
+}
+
+.monocroma .unk-show img {
+    border: 2px solid #1f2a2b;
+}
+
+.monocroma .unk-info h4 {
+    border-left: 3px solid #f8f8f8;
+    background-color: #222222;
+}
+  
+.monocroma .knw-box {
+    background-color: #b1d3d5;
+    border: 2px solid #485152;
+}
+
+.monocroma .knw-show img {
+    border: 2px solid #485152;
+}
+
+.monocroma .activator-show img {
+    background-color: #ffffff;
+    border: 2px solid #485152;
+}
+  
+.monocroma .knw-info h4 {
+    border-left: 3px solid #f8f8f8;
+    background-color: #222222;
+}
+  
+.monocroma .knw-info textarea {
+    border: 1px solid #8badaf;
+    background-color: #ffffff;
+}
+
+.monocroma .l-form {
+    border: 2px solid #485152;
+    background-color: #ffffff;
+}
+
+.monocroma .element_view {
+    background-color: #b1d3d5;
+    border: 2px solid #485152;
+}
+
+.monocroma #rare_ring {
+    border: 2px solid #00000081;
+}
+  
+.monocroma #icon_img {
+    border: 2px solid #ffffff;
+}
+  
+.monocroma #new_img {
+    background-color: #00000000;
+    color: #00000000;
+}
+  
+.monocroma #new_img:hover {
+    color: white;
+    background-color: #04aa6d50;
+}
+  
+.monocroma #preview_img {
+    border: 4px solid #485152;
+}
+
+
+
+
+.monocroma #leyend_panel {
+    background-color: #3f3f3f;
+}
+
+.monocroma #filter_panel {
+    background-color: #c5c5c5;
+}
+
+.monocroma #filter_controller {
+    background-color: #b1d3d5;
+}
+
+.monocroma #contenido_panel {
+    background-color: #b1d3d5;
+}
+
+.monocroma #page_panel {
+    background-color: #b1d3d5;
+}
+
+.monocroma .boton_pag {
+    border: 1px solid #ffffff;
+    background-color: #c5c5c5;
+}
+
+.monocroma .active_page {
+    background-color: #222222;
+    border: 1px solid #080808 !important;
+}
+
+.monocroma .filter_button {
+    border: 1px solid #3f3f3f;
+}
+
+.monocroma .autor_border {
+    border: 1px solid #d97038;
+    background-color: #f2c8b1;
+}
+
+.monocroma .fecha_border {
+    border: 1px solid #63adbf;
+    background-color: #bbe5f0;
+}
+
+.monocroma .progreso_border {
+    border: 1px solid #b563bf;
+    background-color: #eabdf0;
+}

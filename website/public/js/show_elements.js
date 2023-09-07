@@ -3,11 +3,13 @@ let arrayMaestro = []; // Array de Soporte para no alterar los datos Originales
 let nItems = 4; // Numero de Elementos mostrados en cada Pagina
 let rol = 0;
 let url= "";
+let indicador = "";
 
 // Funcion que toma el array de objetos obtenido por PHP
-function caja_fuerte(arrayElementos, permiso, direccion){
-  
+function caja_fuerte(arrayElementos, permiso, direccion, indicar){
   url=direccion;
+
+  indicador = indicar;
   
   rol = permiso;
   
@@ -17,6 +19,8 @@ function caja_fuerte(arrayElementos, permiso, direccion){
 function busqueda(){ // A cualquier cambio en la busqueda se llama a esta funcion
   arrayMaestro = listado.slice();
 
+  console.log(arrayMaestro);
+
   if(document.getElementById("filter_controller") != ""){
     filtrar(); // Primero se filtra el array
   }
@@ -25,14 +29,14 @@ function busqueda(){ // A cualquier cambio en la busqueda se llama a esta funcio
     buscar(); // Entonces se compara el resultado 
   }
 
-  ordenar(); // Entonces se ordenan los items
+  //ordenar();  Entonces se ordenan los items
   
 
   page_maker();
   listar_elementos();// Por ultimo se paginan los resultados
   // Se le envia con un parametro falso indicando que no es una ejecucion automatica. La cual se hace al cargar la pagina
-  actual_page = parseInt(document.getElementById("page_controller").value)+1;
-  document.getElementById("page_"+actual_page).classList.add("active_page");
+  //actual_page = parseInt(document.getElementById("page_controller").value)+1;
+  //document.getElementById("page_"+actual_page).classList.add("active_page");
 }
 
 
@@ -85,7 +89,7 @@ function listar_elementos(){
 
     let divProgreso = document.createElement("div");
     divProgreso.classList.add("cajalateral");
-    divProgreso.setAttribute("style", "background: " + arraySon[6] + ";");
+    divProgreso.setAttribute("style", "background-color: " + arraySon[5] + "; border: 2px solid #0000009a;");
 
     //style=" color: red; "
 
@@ -102,6 +106,23 @@ function listar_elementos(){
     let divInfo = document.createElement("div");
     divInfo.classList.add("cajainfo");
 
+    let newUl = document.createElement("ul");
+    let newLi = document.createElement("li");
+    text = document.createTextNode("Creador: " + arraySon[2]);
+    newLi.appendChild(text);
+    newUl.appendChild(newLi);
+
+    newLi = document.createElement("li");
+    text = document.createTextNode("Año: " + arraySon[3]);
+    newLi.appendChild(text);
+    newUl.appendChild(newLi);
+
+    newLi = document.createElement("li");
+    text = document.createTextNode("Progreso: " + arraySon[4]);
+    newLi.appendChild(text);
+    newUl.appendChild(newLi);
+
+    divInfo.appendChild(newUl);
 
     let divBotones = document.createElement("div");
     divBotones.classList.add("cajabotones");
@@ -109,6 +130,10 @@ function listar_elementos(){
 
     let botonDelete = document.createElement("button");
     botonDelete.classList.add("cajaboton");
+    botonDelete.setAttribute("data-bs-toggle", "modal");
+    botonDelete.setAttribute("data-bs-target", "#confirmar_delete");
+    botonDelete.setAttribute("onclick", "place_id(" + arraySon[0] + ", 'eliminar_elemento');");
+
 
     newI = document.createElement("i");
     newI.classList.add("fa", "fa-trash");
@@ -119,10 +144,14 @@ function listar_elementos(){
     let botonEdit = document.createElement("button");
     botonEdit.classList.add("cajaboton");
 
+    let aEdit = document.createElement("a");
+    aEdit.setAttribute("href", url + "/arquitecto/add_" + indicador + "/" + arraySon[0]);
+
     newI = document.createElement("i");
     newI.classList.add("fa", "fa-paint-brush");
 
-    botonEdit.appendChild(newI);
+    aEdit.appendChild(newI);
+    botonEdit.appendChild(aEdit);
 
     let botonConfig = document.createElement("button");
     botonConfig.classList.add("cajaboton");
@@ -203,7 +232,8 @@ function filtrar(){
   for (n = 0; n < filtros.length; n++){
     arrayFiltro = [filtros[n].innerHTML, filtros[n].name];
     switch (filtros[n].name){
-      case "5":
+      case "2":
+        
         filtroAutor.push(arrayFiltro);
         break;
       case "3":
@@ -309,7 +339,7 @@ function ordenar(){
       colum = 1; // Nombre
       break;
     case 1:
-      colum = 5; // Autor
+      colum = 2; // Autor
       break;
     case 2:
       colum = 6; // Fecha

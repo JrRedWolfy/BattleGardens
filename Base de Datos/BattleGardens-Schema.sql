@@ -11,30 +11,13 @@ nombre varchar(16) not null
 );
 
 /*PROBABLEMENTE FINAL*/
-create table tema(
-tema varchar(16) primary key
-);
-
-/*PROBABLEMENTE FINAL*/
-create table idioma(
-idioma varchar(8) primary key
+create table color(
+color varchar(16) primary key
 );
 
 /*PROBABLEMENTE FINAL*/
 create table letra(
 letra varchar(8) primary key
-);
-
-/*PROBABLEMENTE FINAL*/
-create table preferencias(
-id_preferencias int primary key,
-tema varchar(16) default 'BattleGarden' not null,
-idioma varchar(8) default 'Español' not null,
-letra varchar(8) default 'Mediana' not null,
-
-CONSTRAINT FK0 FOREIGN KEY (tema) references tema (tema) on delete restrict on update cascade,
-CONSTRAINT FK1 FOREIGN KEY (idioma) references idioma (idioma) on delete restrict on update cascade,
-CONSTRAINT FK2 FOREIGN KEY (letra) references letra (letra) on delete restrict on update cascade
 );
 
 /*PROBABLEMENTE FINAL*/
@@ -47,13 +30,15 @@ ryoz int not null default 0,
 dinero int not null default 100,
 main int not null default 1, /*Cambiar por el Recluta 1*/
 id_rol int not null,
-id_preferencias int default null,
 fecha_creacion date,
 ultima_sesion date default null,
+letra varchar(8) default "mediana",
+color varchar(8) default "base",
 inhabilitado boolean default 0,
 
 /*Añadir la Clave foranea del extraviado cuando se pueda*/
-CONSTRAINT FK3 FOREIGN KEY (id_preferencias) references preferencias (id_preferencias) on delete restrict on update cascade,
+CONSTRAINT FK1 FOREIGN KEY (color) references color (color) on delete restrict on update cascade,
+CONSTRAINT FK2 FOREIGN KEY (letra) references letra (letra) on delete restrict on update cascade,
 CONSTRAINT FK4 FOREIGN KEY (id_rol) references tipo_user (id_rol) on delete restrict on update cascade
 );
 
@@ -106,15 +91,15 @@ valor int not null
 create table progreso(
 id_progreso int primary key auto_increment,
 nombre varchar(16) not null,
-color varchar(8) not null
+color varchar(8) not null,
+texto varchar(128) not null
 );
 
 /*PROBABLEMENTE FINAL(añadir default img)*/
 create table artefacto(
 id_artefacto int primary key auto_increment,
 id_rareza int not null,
-img varchar(256) default 'artefacto_default.png' not null,
-icono varchar(256) default 'artefacto_icono_default.png' not null,
+icono varchar(256) default 'artefacto_icono_default.jpg' not null,
 nombre varchar(32) not null,
 descripcion varchar(512) not null,
 plus_carisma int not null default 0,
@@ -168,6 +153,7 @@ img varchar(256) default 'extraviado_default.png' not null,
 icono varchar(256) default 'icono_default.png' not null,
 fecha date not null,
 id_progreso int not null default 2,
+inhabilitado boolean default 0,
 
 CONSTRAINT FKb7 FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASCADE ON DELETE RESTRICT,
 CONSTRAINT FKB5 FOREIGN KEY(id_rareza)  REFERENCES rareza (id_rareza) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -196,7 +182,7 @@ create table historia(
 id_historia int primary key auto_increment,
 id_mundo int not null,
 titulo varchar(32) not null,
-contenido varchar(1024) not null, /*Seguro aumentar en un futuro*/
+contenido varchar(2048) not null, /*Seguro aumentar en un futuro*/
 autor varchar(32) not null,
 fecha date not null,
 id_progreso int not null,
@@ -261,6 +247,7 @@ nombre varchar(16) not null
 create table elemento(
 id_elemento int primary key auto_increment,
 nombre varchar(32) not null,
+activacion varchar(8) not null,
 imagen_elemento varchar(256) default 'elemento_default.png' not null
 );
 
@@ -378,7 +365,7 @@ CONSTRAINT FK3e FOREIGN KEY(autor)  REFERENCES usuario (nickname) ON UPDATE CASC
 create table relacciones(
 id_extraviado int,
 id_conocido int,
-motivo varchar(256) not null,
+motivo varchar(256) not null default "",
 
 primary key(id_extraviado, id_conocido),
 CONSTRAINT FK31 FOREIGN KEY(id_extraviado)  REFERENCES extraviado (id_extraviado) ON UPDATE CASCADE ON DELETE RESTRICT,

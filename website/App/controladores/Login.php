@@ -23,6 +23,7 @@
 
                     redireccionar('/inicio');
                 } else{
+
                     redireccionar('/login/index/error_1');
                 }
 
@@ -37,9 +38,8 @@
 
                 }
 
-               //$this->datos['error'] = $error;
-
-               $this->vista('login', $this->datos);
+                $this->datos['error'] = $error;
+                $this->vista('landing_page', $this->datos);
             }
         }
 

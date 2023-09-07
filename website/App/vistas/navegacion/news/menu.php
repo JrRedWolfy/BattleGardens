@@ -4,7 +4,9 @@
     require_once RUTA_APP.'/vistas/inc/header_no_login.php'; 
 }?>
 
-<h2>Estas en Noticias :3</h2>
+<!-- EN DESUSO, DESCONTINUADO -->
+
+<h2>Estas en Noticias </h2>
 
 <?php if (isset($datos["usuarioSesion"])&&($datos["usuarioSesion"]->id_rol >= 1)){
     print_r($datos["usuarioSesion"]);
